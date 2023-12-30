@@ -1,0 +1,22 @@
+package com.dwips.parkingcontrol.api.v1.dto;
+
+import com.dwips.parkingcontrol.api.v1.domain.Tparkinfo;
+import com.dwips.parkingcontrol.api.v1.domain.Tperiodmember;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class CarinResponseDto {
+
+    private Integer result;
+
+    private Tparkinfo tparkinfo;
+
+    private Tperiodmember tperiodmember;
+
+}

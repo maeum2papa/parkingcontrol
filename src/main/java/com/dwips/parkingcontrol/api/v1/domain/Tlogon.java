@@ -1,13 +1,15 @@
 package com.dwips.parkingcontrol.api.v1.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 /**
- * 로그온정보
+ * 로그온정보 (유인이나 기타 프로그램이 시작할때 로그인 하는 정보)
  *
  * logtype	0	로그오프
  * 	1	로그온
@@ -16,6 +18,8 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Tlogon {
 
     @Id

@@ -41,7 +41,7 @@ public class Tdiscountl {
 
     //할인키
     @Column(columnDefinition = "INT")
-    private Long key;
+    private Long tkey;
 
     //할인타입(시간,금액,퍼센트,고정)
     @Column(columnDefinition = "INT")
