@@ -33,7 +33,7 @@ public class CarinServiceImpl implements CarinService{
 
         //등록차량 여부 상세 점검 결과
         Boolean tperiodmemberFlag = true;
-        LocalDateTime today = LocalDateTime.now();
+        LocalDateTime today = commonComponent.stringToLocalDateTime(carinRequestDto.getIndatetime());
 
         Integer result = 0;
 
@@ -57,6 +57,7 @@ public class CarinServiceImpl implements CarinService{
 
             //주차가능유무
             if (tperiodmember.getUseflag() == 0 && tperiodmemberFlag) {
+                log.info("등록차량 주차 불가능");
                 tperiodmemberFlag = false;
             }
 
@@ -67,6 +68,7 @@ public class CarinServiceImpl implements CarinService{
 
                 // !(startdate <= LocalDateTime.now())
                 if (!(!startdate.isAfter(today))) {
+                    log.info("등록차량 게시일 이전");
                     tperiodmemberFlag = false;
                 }
             }
@@ -79,6 +81,7 @@ public class CarinServiceImpl implements CarinService{
 
                 // !(enddate >= LocalDateTime.now())
                 if (!(!enddate.isBefore(today))) {
+                    log.info("등록차량 종료일 초과");
                     tperiodmemberFlag = false;
                 }
             }
@@ -87,6 +90,7 @@ public class CarinServiceImpl implements CarinService{
             if (tperiodmember.getParklevel() == 1 && tperiodmemberFlag) {
                 if (carnumLast != lastDigit) {
 //                    throw new RuntimeException("홀짝제로 입차 거부");
+                    log.info("홀짝제 위반 (번호판 끝자리가 날짜와 일치하지 않음)");
                     tperiodmemberFlag = false;
                 }
             }
@@ -95,6 +99,7 @@ public class CarinServiceImpl implements CarinService{
             if (tperiodmember.getParklevel() == 2 && tperiodmemberFlag) {
                 if (carnumLast == lastDigit) {
 //                    throw new RuntimeException("10부제로 입차 거부");
+                    log.info("10부제 위반 (번호판 끝자리가 날짜와 같음)");
                     tperiodmemberFlag = false;
                 }
             }
@@ -105,36 +110,43 @@ public class CarinServiceImpl implements CarinService{
 
                 //월
                 if (DayOfWeek.MONDAY == dayOfWeek && charArray[0] == '0' && tperiodmemberFlag) {
+                    log.info("요일제 위반 (월요일 운행 금지)");
                     tperiodmemberFlag = false;
                 }
 
                 //화
                 if (DayOfWeek.MONDAY == dayOfWeek && charArray[1] == '0' && tperiodmemberFlag) {
+                    log.info("요일제 위반 (화요일 운행 금지)");
                     tperiodmemberFlag = false;
                 }
 
                 //수
                 if (DayOfWeek.MONDAY == dayOfWeek && charArray[2] == '0' && tperiodmemberFlag) {
+                    log.info("요일제 위반 (수요일 운행 금지)");
                     tperiodmemberFlag = false;
                 }
 
                 //목
                 if (DayOfWeek.MONDAY == dayOfWeek && charArray[3] == '0' && tperiodmemberFlag) {
+                    log.info("요일제 위반 (목요일 운행 금지)");
                     tperiodmemberFlag = false;
                 }
 
                 //금
                 if (DayOfWeek.MONDAY == dayOfWeek && charArray[4] == '0' && tperiodmemberFlag) {
+                    log.info("요일제 위반 (금요일 운행 금지)");
                     tperiodmemberFlag = false;
                 }
 
                 //토
                 if (DayOfWeek.SATURDAY == dayOfWeek && charArray[5] == '0' && tperiodmemberFlag) {
+                    log.info("요일제 위반 (토요일 운행 금지)");
                     tperiodmemberFlag = false;
                 }
 
                 //일
                 if (DayOfWeek.MONDAY == dayOfWeek && charArray[6] == '0' && tperiodmemberFlag) {
+                    log.info("요일제 위반 (일요일 운행 금지)");
                     tperiodmemberFlag = false;
                 }
 
@@ -162,6 +174,7 @@ public class CarinServiceImpl implements CarinService{
 
                 // !(!(startDateTime <= LocalDateTime.now())
                 if (!(!startDateTime.isAfter(today))) {
+                    log.info("등록차량 주차 가능시간 이전에 입차");
                     tperiodmemberFlag = false;
                 }
 
@@ -180,12 +193,14 @@ public class CarinServiceImpl implements CarinService{
 
                 // !(endDateTime >= LocalDateTime.now())
                 if (!(!endDateTime.isBefore(today))) {
+                    log.info("등록차량 주차 가능시간 이후에 입차");
                     tperiodmemberFlag = false;
                 }
 
             }
 
         } else {
+            log.info("등록차량 아님");
             tperiodmemberFlag = false;
         }
 
@@ -198,6 +213,7 @@ public class CarinServiceImpl implements CarinService{
 
             //옵션이 중복제거이면
             if(carinRequestDto.getOption() == 1){
+                log.info("등록차량 중복 제거");
                 tperiodinoutRespository.deleteBySitenumAndGroupnumAndCarnumAndOutflag(
                         carinRequestDto.getSitenum(),
                         carinRequestDto.getGroupnum(),
@@ -229,6 +245,7 @@ public class CarinServiceImpl implements CarinService{
 
             //옵션이 중복제거이면
             if(carinRequestDto.getOption() == 1){
+                log.info("일반차량 중복 제거");
                 tparkinfoRepository.deleteBySitenumAndGroupnumAndCarnumAndOutflag(
                         carinRequestDto.getSitenum(),
                         carinRequestDto.getGroupnum(),
