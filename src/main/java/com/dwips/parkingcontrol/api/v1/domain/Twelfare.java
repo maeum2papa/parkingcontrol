@@ -1,9 +1,12 @@
 package com.dwips.parkingcontrol.api.v1.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -19,6 +22,8 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Twelfare {
 
     @Id
@@ -58,10 +63,10 @@ public class Twelfare {
     private LocalDateTime regdate;
 
     //개시일자
-    private LocalDateTime starddate;
+    private LocalDate starddate;
 
     //종료일자
-    private LocalDateTime enddate;
+    private LocalDate enddate;
 
     //할인키(tdiscountl(할인테이블))
     @Column(columnDefinition = "INT")

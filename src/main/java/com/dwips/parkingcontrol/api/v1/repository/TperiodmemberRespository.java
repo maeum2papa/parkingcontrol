@@ -7,4 +7,8 @@ public interface TperiodmemberRespository extends JpaRepository<Tperiodmember, L
 
     Tperiodmember findBySitenumAndGroupnumAndCarnumAndUseyn(Long sitenum, Long groupnum, String carnum,String useyn);
 
+    Tperiodmember findBySitenumAndGroupnumAndDevicenumAndCarnumAndUseyn(Long sitenum, Long groupnum, Long devicenum, String carnum,String useyn);
+
+    Tperiodmember findByCardno(Long cardno);
+
 }

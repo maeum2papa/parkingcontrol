@@ -1,8 +1,10 @@
 package com.dwips.parkingcontrol.api.v1.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -14,6 +16,8 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Tdiscountinfo {
 
     @Id
@@ -56,6 +60,10 @@ public class Tdiscountinfo {
     //할인값
     @Column(columnDefinition = "INT")
     private Long disvalue;
+
+    //최대 할인
+    @Column(columnDefinition = "INT")
+    private Long maxcountt;
 
     //입차일자
     private LocalDateTime indatetime;
