@@ -1,5 +1,6 @@
 package com.dwips.parkingcontrol.api.v1.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class Tholiday {
     private Long groupnum;
 
     //휴일일자
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate holiday;
 
     //휴일명칭
@@ -35,9 +37,11 @@ public class Tholiday {
     private String msg;
 
     //등록일자
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime regdate;
 
     //수정일자
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime moddate;
 
 }

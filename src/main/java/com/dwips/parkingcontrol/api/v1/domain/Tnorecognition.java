@@ -1,5 +1,6 @@
 package com.dwips.parkingcontrol.api.v1.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -40,6 +41,7 @@ public class Tnorecognition {
     private String ip;
 
     //입차시간
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime iodatetime;
 
     //영상

@@ -1,5 +1,6 @@
 package com.dwips.parkingcontrol.api.v1.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -56,9 +57,11 @@ public class Tparkinfo {
     private String carnum;
 
     //입차날자
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime indatetime;
 
     //출차날자
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime outdatetime;
 
     //입차 영상
@@ -106,6 +109,7 @@ public class Tparkinfo {
     private String acceptno;
 
     //승인시간
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime accepttime;
 
     //카드금액
@@ -154,6 +158,7 @@ public class Tparkinfo {
     private Long tendflag;
 
     //일마감시간
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime denddate;
 
     //입출구문(X:계산완료 O:출차)

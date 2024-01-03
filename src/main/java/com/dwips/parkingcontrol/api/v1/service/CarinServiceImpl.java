@@ -56,7 +56,7 @@ public class CarinServiceImpl implements CarinService{
         if (tperiodmember != null) {
 
             //주차가능유무
-            if (tperiodmember.getUseflag() == 0 && tperiodmemberFlag) {
+            if (tperiodmember.getUseflag() == 0 && tperiodmemberFlag && tperiodmember.getUseyn() != "y") {
                 log.info("등록차량 주차 불가능");
                 tperiodmemberFlag = false;
             }
@@ -218,7 +218,7 @@ public class CarinServiceImpl implements CarinService{
                         carinRequestDto.getSitenum(),
                         carinRequestDto.getGroupnum(),
                         carinRequestDto.getCarnum(),
-                        0L
+                        73L
                 );
             }
 
@@ -232,10 +232,14 @@ public class CarinServiceImpl implements CarinService{
                     .indevicenum(carinRequestDto.getDevicenum())
                     .indatetime(commonComponent.stringToLocalDateTime(carinRequestDto.getIndatetime()))
                     .inimage(carinRequestDto.getImage())
-                    .outflag(0L)
+                    .outflag(73L)
                     .build();
 
             tperiodinoutRespository.save(tperiodinoutBuild);
+
+            tperiodmember.setOutflag(73L);
+
+            tperiodmemberRespository.save(tperiodmember);
 
             result = 1;
 
@@ -250,7 +254,7 @@ public class CarinServiceImpl implements CarinService{
                         carinRequestDto.getSitenum(),
                         carinRequestDto.getGroupnum(),
                         carinRequestDto.getCarnum(),
-                        0L
+                        73L
                 );
             }
 
@@ -263,7 +267,7 @@ public class CarinServiceImpl implements CarinService{
                     .indevicenum(carinRequestDto.getDevicenum())
                     .indatetime(commonComponent.stringToLocalDateTime(carinRequestDto.getIndatetime()))
                     .inimage(carinRequestDto.getImage())
-                    .outflag(0L)
+                    .outflag(73L) // 73 : 입차
                     .build();
 
             tparkinfoRepository.save(tparkinfoBuild);

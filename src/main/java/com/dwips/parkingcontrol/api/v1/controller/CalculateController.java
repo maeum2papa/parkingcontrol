@@ -23,7 +23,7 @@ public class CalculateController {
     @PostMapping("/calculate")
     public CalculateResponseDto calculate(@RequestBody CalculateRequestDto calculateRequestDto){
 
-        log.info("정산(출차) : {}",calculateRequestDto.toString());
+        log.info("정산 조회 : {}",calculateRequestDto.toString());
 
         if(!calculateRequestDto.getIOTYPE().equals("C")){
             throw new RuntimeException("정산 정보가 아닙니다.");

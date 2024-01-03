@@ -1,5 +1,8 @@
 package com.dwips.parkingcontrol.api.v1.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -53,6 +56,7 @@ public class Tperiodinout {
     private Long indevicenum;
 
     //입차날자
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime indatetime;
 
     //입차 영상
@@ -64,6 +68,7 @@ public class Tperiodinout {
     private Long outdevicenum;
 
     //출차날자
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime outdatetime;
 
     //출차영상
@@ -75,6 +80,7 @@ public class Tperiodinout {
     private Long parktime;
 
     //종료일자
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate enddate;
 
     //관리자코드

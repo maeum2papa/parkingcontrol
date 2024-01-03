@@ -3,6 +3,9 @@ package com.dwips.parkingcontrol.api.v1.repository;
 import com.dwips.parkingcontrol.api.v1.domain.Tperiodmember;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface TperiodmemberRespository extends JpaRepository<Tperiodmember, Long> {
 
     Tperiodmember findBySitenumAndGroupnumAndCarnumAndUseyn(Long sitenum, Long groupnum, String carnum,String useyn);
@@ -11,4 +14,5 @@ public interface TperiodmemberRespository extends JpaRepository<Tperiodmember, L
 
     Tperiodmember findByCardno(Long cardno);
 
+    Optional<Tperiodmember> findByXindex(Long xindex);
 }

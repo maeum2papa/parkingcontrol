@@ -27,4 +27,12 @@ public interface TparkinfoRepository extends JpaRepository<Tparkinfo, Long> {
             Long groupnum,
             Long outflag
     );
+
+    Tparkinfo findBySitenumAndGroupnumAndIndevicenumAndCarnumAndOutflag(
+            Long sitenum,
+            Long groupnum,
+            Long indevicenum,
+            String carnum,
+            Long outflag
+    );
 }

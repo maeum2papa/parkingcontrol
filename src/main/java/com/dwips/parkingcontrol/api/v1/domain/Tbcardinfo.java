@@ -1,5 +1,6 @@
 package com.dwips.parkingcontrol.api.v1.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -60,6 +61,7 @@ public class Tbcardinfo {
     private String dealnum;
 
     //처리날자
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dealdate;
 
     //처리시간
@@ -99,9 +101,11 @@ public class Tbcardinfo {
     private Long parktime;
 
     //입차시간
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime indatetime;
 
     //출차시간
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime outdatetime;
 
     //결제취소금액
@@ -109,6 +113,7 @@ public class Tbcardinfo {
     private Long cancelmoney;
 
     //취소시간
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime canceltime;
 
     //외래키(tparkin xindex 및 tperiodaccount xindex)

@@ -64,7 +64,6 @@ public class CalculateSerivceImpl  implements CalculateService{
                 calculateRequestDto.getCarnum(),
                 "y");
 
-
         if (tperiodmember != null) {
             result = 1;
 
@@ -77,7 +76,7 @@ public class CalculateSerivceImpl  implements CalculateService{
                 tparkinfoList = tparkinfoRepository.findAllBySitenumAndGroupnumAndOutflag(
                         calculateRequestDto.getSitenum(),
                         calculateRequestDto.getGroupnum(),
-                        0L);
+                        73L);
 
             }else {
 
@@ -98,7 +97,7 @@ public class CalculateSerivceImpl  implements CalculateService{
                         calculateRequestDto.getSitenum(),
                         calculateRequestDto.getGroupnum(),
                         carnum,
-                        0L);
+                        73L);
             }
 
             if(tparkinfoList.size() != 0) {
