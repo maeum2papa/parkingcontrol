@@ -57,13 +57,16 @@ public class CalculateAndOutServiceImpl implements CalculateAndOutService{
             }else{
                 //없으면 tparkinfo 에 데이터 insert 하여 우선 입차 처리
                 Tparkinfo insertTparkinfo = calculateAndOutRequestDto.getTparkinfo();
-                tparkinfoRepository.save(insertTparkinfo);
+                tparkinfo = tparkinfoRepository.save(insertTparkinfo);
+
             }
 
             //tbcardinfo 있으면 insert
             if(calculateAndOutRequestDto.getTbcardinfo() != null){
 
                 Tbcardinfo requestTbcardinfo = calculateAndOutRequestDto.getTbcardinfo();
+
+                requestTbcardinfo.setPindex(tparkinfo.getXindex());
 
                 tbcardinfoRepository.save(requestTbcardinfo);
             }
@@ -72,6 +75,8 @@ public class CalculateAndOutServiceImpl implements CalculateAndOutService{
             if(calculateAndOutRequestDto.getTdiscountinfo() != null){
 
                 Tdiscountinfo requestTdiscountinfo  = calculateAndOutRequestDto.getTdiscountinfo();
+
+                requestTdiscountinfo.setPindex(tparkinfo.getXindex());
 
                 tdiscountinfoRepository.save(requestTdiscountinfo);
             }
@@ -105,8 +110,9 @@ public class CalculateAndOutServiceImpl implements CalculateAndOutService{
 
             if(tparkinfo != null) {
                 tparkinfo.setOutflag(79L);
+                tparkinfo.setOutdatetime(calculateAndOutRequestDto.getTparkinfo().getOutdatetime());
                 tparkinfoRepository.save(tparkinfo);
-                result = 1;
+                result = 2;
             }
 
         }else if(calculateAndOutRequestDto.getTperiodinout() != null){
@@ -139,7 +145,7 @@ public class CalculateAndOutServiceImpl implements CalculateAndOutService{
             if(tperiodmember != null){
                 tperiodmember.setOutflag(79L);
                 tperiodmemberRespository.save(tperiodmember);
-                result = 2;
+                result = 1;
             }
         }
 
