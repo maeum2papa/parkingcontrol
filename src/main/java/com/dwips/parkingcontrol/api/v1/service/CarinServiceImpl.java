@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 @Slf4j
 @Service
@@ -29,7 +30,7 @@ public class CarinServiceImpl implements CarinService{
 
 
     @Override
-    public CarinResponseDto saveCar(CarinRequestDto carinRequestDto) {
+    public HashMap<Object, Object> saveCar(CarinRequestDto carinRequestDto) {
 
         //등록차량 여부 상세 점검 결과
         Boolean tperiodmemberFlag = true;
@@ -275,12 +276,14 @@ public class CarinServiceImpl implements CarinService{
             result = 2;
         }
 
+        HashMap<Object, Object> resultMap = new HashMap<>();
 
-        return CarinResponseDto.builder()
-                .result(result)
-                .tperiodmember(tperiodmember)
-                .tparkinfo(tparkinfoBuild)
-                .build();
+        resultMap.put("result",result);
+        resultMap.put("tperiodmember",tperiodmember);
+        resultMap.put("tparkinfo",tparkinfoBuild);
+
+
+        return resultMap;
 
     }
 

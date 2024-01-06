@@ -5,6 +5,8 @@ import com.dwips.parkingcontrol.api.v1.dto.CalculateResponseDto;
 import com.dwips.parkingcontrol.api.v1.dto.CarinRequestDto;
 import com.dwips.parkingcontrol.api.v1.dto.CarinResponseDto;
 
+import java.util.HashMap;
+
 public interface CalculateService {
-        public CalculateResponseDto calculate(CalculateRequestDto calculateRequestDto);
+        public HashMap<String,Object> calculate(CalculateRequestDto calculateRequestDto);
 }

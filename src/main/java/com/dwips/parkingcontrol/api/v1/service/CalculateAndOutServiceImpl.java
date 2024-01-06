@@ -19,6 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -33,7 +35,7 @@ public class CalculateAndOutServiceImpl implements CalculateAndOutService{
 
     @Override
     @Transactional
-    public CalculateAndOutResponseDto calculate(CalculateAndOutRequestDto calculateAndOutRequestDto) {
+    public HashMap<String,Object> calculate(CalculateAndOutRequestDto calculateAndOutRequestDto) {
         //정산
 
         Integer result = 0;
@@ -85,15 +87,16 @@ public class CalculateAndOutServiceImpl implements CalculateAndOutService{
 
         }
 
+        HashMap<String, Object> resultMap = new HashMap<>();
 
-        return CalculateAndOutResponseDto.builder()
-                .result(result)
-                .build();
+        resultMap.put("result",result);
+
+        return resultMap;
     }
 
     @Override
     @Transactional
-    public CalculateAndOutResponseDto out(CalculateAndOutRequestDto calculateAndOutRequestDto) {
+    public HashMap<String,Object> out(CalculateAndOutRequestDto calculateAndOutRequestDto) {
         //출차
 
         Integer result = 0;
@@ -149,8 +152,11 @@ public class CalculateAndOutServiceImpl implements CalculateAndOutService{
             }
         }
 
-        return CalculateAndOutResponseDto.builder()
-                .result(result)
-                .build();
+        HashMap<String, Object> resultMap = new HashMap<>();
+
+        resultMap.put("result",result);
+
+        return resultMap;
+
     }
 }

@@ -5,9 +5,11 @@ import com.dwips.parkingcontrol.api.v1.dto.CalculateAndOutResponseDto;
 import com.dwips.parkingcontrol.api.v1.dto.CalculateRequestDto;
 import com.dwips.parkingcontrol.api.v1.dto.CalculateResponseDto;
 
+import java.util.HashMap;
+
 public interface CalculateAndOutService {
 
-    public CalculateAndOutResponseDto calculate(CalculateAndOutRequestDto calculateAndOutRequestDto);
+    public HashMap<String,Object> calculate(CalculateAndOutRequestDto calculateAndOutRequestDto);
 
-    public CalculateAndOutResponseDto out(CalculateAndOutRequestDto calculateAndOutRequestDto);
+    public HashMap<String,Object> out(CalculateAndOutRequestDto calculateAndOutRequestDto);
 }

@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /*
@@ -43,7 +44,7 @@ public class CalculateSerivceImpl  implements CalculateService{
     private final TdiscountinfoRepository tdiscountinfoRepository;
 
     @Override
-    public CalculateResponseDto calculate(CalculateRequestDto calculateRequestDto) {
+    public HashMap<String,Object> calculate(CalculateRequestDto calculateRequestDto) {
 
         Integer result = 0;
 
@@ -127,14 +128,17 @@ public class CalculateSerivceImpl  implements CalculateService{
         if(tdiscountinfoList.size() == 0) tdiscountinfoList = null;
         if(twelfareList.size() == 0) twelfareList = null;
 
-        return CalculateResponseDto.builder()
-                .result(result)
-                .tparkinfo(tparkinfoList)
-                .tbcardinfo(tbcardinfoList)
-                .tdiscountinfo(tdiscountinfoList)
-                .welfare(twelfareList)
-                .tperiodmember(tperiodmember)
-                .build();
+
+        HashMap<String, Object> responseMap = new HashMap<>();
+
+        responseMap.put("result",result);
+        responseMap.put("tparkinfo",tparkinfoList);
+        responseMap.put("tbcardinfo",tbcardinfoList);
+        responseMap.put("tdiscountinfo",tdiscountinfoList);
+        responseMap.put("welfare",twelfareList);
+        responseMap.put("tperiodmember",tperiodmember);
+
+        return responseMap;
 
     }
 }

@@ -1,9 +1,6 @@
 package com.dwips.parkingcontrol.api.v1.controller;
 
-import com.dwips.parkingcontrol.api.v1.domain.Tbcardinfo;
-import com.dwips.parkingcontrol.api.v1.domain.Tdiscountinfo;
-import com.dwips.parkingcontrol.api.v1.domain.Tparkinfo;
-import com.dwips.parkingcontrol.api.v1.domain.Twelfare;
+import com.dwips.parkingcontrol.api.v1.domain.*;
 import com.dwips.parkingcontrol.api.v1.dto.*;
 import com.dwips.parkingcontrol.api.v1.service.CalculateSearchService;
 import com.dwips.parkingcontrol.api.v1.service.CalculateService;
@@ -36,7 +33,16 @@ public class CalculateController {
             throw new RuntimeException("정산 정보가 아닙니다.");
         }
 
-        return calculateService.calculate(calculateRequestDto);
+        HashMap<String, Object> result = calculateService.calculate(calculateRequestDto);
+
+        return CalculateResponseDto.builder()
+                .result((Integer) result.get("result"))
+                .tparkinfo((List<Tparkinfo>) result.get("tparkinfo"))
+                .tbcardinfo((List<List<Tbcardinfo>>) result.get("tbcardinfo"))
+                .tdiscountinfo((List<List<Tdiscountinfo>>) result.get("tdiscountinfo"))
+                .tperiodmember((Tperiodmember) result.get("tperiodmember"))
+                .welfare((List<List<Twelfare>>) result.get("welfare"))
+                .build();
 
     }
 

@@ -4,7 +4,9 @@ import com.dwips.parkingcontrol.api.v1.domain.Tparkinfo;
 import com.dwips.parkingcontrol.api.v1.dto.CarinRequestDto;
 import com.dwips.parkingcontrol.api.v1.dto.CarinResponseDto;
 
+import java.util.HashMap;
+
 public interface CarinService {
 
-    public CarinResponseDto saveCar(CarinRequestDto carinRequestDto);
+    public HashMap<Object, Object> saveCar(CarinRequestDto carinRequestDto);
 }

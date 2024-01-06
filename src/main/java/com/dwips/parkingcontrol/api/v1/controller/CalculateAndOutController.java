@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -25,7 +27,7 @@ public class CalculateAndOutController {
 
         log.info("정산 & 출차 저장 : {}",calculateAndOutRequestDto.toString());
 
-        CalculateAndOutResponseDto result = null;
+        HashMap<String, Object> result = new HashMap<>();
 
         if(calculateAndOutRequestDto.getIOTYPE().equals("U")) {
             //정산
@@ -42,7 +44,8 @@ public class CalculateAndOutController {
         }
 
 
-        return result;
-
+        return CalculateAndOutResponseDto.builder()
+                .result((Integer) result.get("result"))
+                .build();
     }
 }
