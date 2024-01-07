@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 @Slf4j
@@ -111,9 +112,14 @@ public class CalculateAndOutServiceImpl implements CalculateAndOutService{
                     calculateAndOutRequestDto.getTparkinfo().getCarnum(),
                     88L);
 
+            LocalDateTime today = LocalDateTime.now();
+            if(calculateAndOutRequestDto.getTparkinfo().getOutdatetime() != null){
+                today = calculateAndOutRequestDto.getTparkinfo().getOutdatetime();
+            }
+
             if(tparkinfo != null) {
                 tparkinfo.setOutflag(79L);
-                tparkinfo.setOutdatetime(calculateAndOutRequestDto.getTparkinfo().getOutdatetime());
+                tparkinfo.setOutdatetime(today);
                 tparkinfoRepository.save(tparkinfo);
                 result = 2;
             }

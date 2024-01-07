@@ -34,7 +34,7 @@ public class CarinServiceImpl implements CarinService{
 
         //등록차량 여부 상세 점검 결과
         Boolean tperiodmemberFlag = true;
-        LocalDateTime today = commonComponent.stringToLocalDateTime(carinRequestDto.getIndatetime());
+        LocalDateTime today = commonComponent.stringDateTimeToLocalDateTime(carinRequestDto.getIndatetime());
 
         Integer result = 0;
 
@@ -65,7 +65,7 @@ public class CarinServiceImpl implements CarinService{
             //게시일 체크
             if (tperiodmember.getStartdate() != null && tperiodmemberFlag) {
 
-                LocalDateTime startdate = commonComponent.stringToLocalDateTime(tperiodmember.getStartdate() + " 00:00:00");
+                LocalDateTime startdate = commonComponent.stringDateTimeToLocalDateTime(tperiodmember.getStartdate() + " 00:00:00");
 
                 // !(startdate <= LocalDateTime.now())
                 if (!(!startdate.isAfter(today))) {
@@ -78,7 +78,7 @@ public class CarinServiceImpl implements CarinService{
             //종료일 체크
             if (tperiodmember.getEnddate() != null && tperiodmemberFlag) {
 
-                LocalDateTime enddate = commonComponent.stringToLocalDateTime(tperiodmember.getEnddate() + " 23:59:59");
+                LocalDateTime enddate = commonComponent.stringDateTimeToLocalDateTime(tperiodmember.getEnddate() + " 23:59:59");
 
                 // !(enddate >= LocalDateTime.now())
                 if (!(!enddate.isBefore(today))) {
@@ -171,7 +171,7 @@ public class CarinServiceImpl implements CarinService{
                         String.format("%02d", tperiodparktime.getStartmin())
                         + ":00";
 
-                LocalDateTime startDateTime = commonComponent.stringToLocalDateTime(stringStartDataTime);
+                LocalDateTime startDateTime = commonComponent.stringDateTimeToLocalDateTime(stringStartDataTime);
 
                 // !(!(startDateTime <= LocalDateTime.now())
                 if (!(!startDateTime.isAfter(today))) {
@@ -190,7 +190,7 @@ public class CarinServiceImpl implements CarinService{
                         String.format("%02d", tperiodparktime.getEndmin())
                         + ":59";
 
-                LocalDateTime endDateTime = commonComponent.stringToLocalDateTime(stringEndtDataTime);
+                LocalDateTime endDateTime = commonComponent.stringDateTimeToLocalDateTime(stringEndtDataTime);
 
                 // !(endDateTime >= LocalDateTime.now())
                 if (!(!endDateTime.isBefore(today))) {
@@ -231,7 +231,7 @@ public class CarinServiceImpl implements CarinService{
                     .cartype(tperiodmember.getCartype())
                     .name(tperiodmember.getName())
                     .indevicenum(carinRequestDto.getDevicenum())
-                    .indatetime(commonComponent.stringToLocalDateTime(carinRequestDto.getIndatetime()))
+                    .indatetime(commonComponent.stringDateTimeToLocalDateTime(carinRequestDto.getIndatetime()))
                     .inimage(carinRequestDto.getImage())
                     .outflag(73L)
                     .build();
@@ -266,7 +266,7 @@ public class CarinServiceImpl implements CarinService{
                     .parktype(0L)
                     .carnum(carinRequestDto.getCarnum())
                     .indevicenum(carinRequestDto.getDevicenum())
-                    .indatetime(commonComponent.stringToLocalDateTime(carinRequestDto.getIndatetime()))
+                    .indatetime(commonComponent.stringDateTimeToLocalDateTime(carinRequestDto.getIndatetime()))
                     .inimage(carinRequestDto.getImage())
                     .outflag(73L) // 73 : 입차
                     .build();

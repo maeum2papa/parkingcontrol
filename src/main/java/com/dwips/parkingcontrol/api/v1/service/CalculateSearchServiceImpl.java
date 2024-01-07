@@ -6,10 +6,7 @@ import com.dwips.parkingcontrol.api.v1.domain.Tdiscountinfo;
 import com.dwips.parkingcontrol.api.v1.domain.Tparkinfo;
 import com.dwips.parkingcontrol.api.v1.domain.Twelfare;
 import com.dwips.parkingcontrol.api.v1.dto.CalculateSearchRequestDto;
-import com.dwips.parkingcontrol.api.v1.repository.TbcardinfoRepository;
-import com.dwips.parkingcontrol.api.v1.repository.TdiscountinfoRepository;
-import com.dwips.parkingcontrol.api.v1.repository.TparkinfoRepository;
-import com.dwips.parkingcontrol.api.v1.repository.TwelfareRepository;
+import com.dwips.parkingcontrol.api.v1.repository.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -31,11 +28,9 @@ public class CalculateSearchServiceImpl implements CalculateSearchService{
 
     private final TparkinfoRepository tparkinfoRepository;
     private final TbcardinfoRepository tbcardinfoRepository;
+    private final TparkinfoCustomRepository tparkinfoCustomRepository;
     private final TdiscountinfoRepository tdiscountinfoRepository;
     private final TwelfareRepository twelfareRepository;
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
     @Override
     public HashMap<String,Object> defaultSearch(CalculateSearchRequestDto calculateSearchRequestDto) {
@@ -48,36 +43,7 @@ public class CalculateSearchServiceImpl implements CalculateSearchService{
         HashMap<Long,List<Tdiscountinfo>> tdiscountinfoList = new HashMap<>();
         HashMap<Long,List<Twelfare>> twelfareList = new HashMap<>();
 
-
-        String qlString = "SELECT e FROM Tparkinfo e ";
-
-        List<String> whereArray = new ArrayList<>();
-
-        whereArray.add("e.sitenum = "+calculateSearchRequestDto.getSitenum());
-        whereArray.add("e.groupnum = "+calculateSearchRequestDto.getGroupnum());
-        whereArray.add("e.outdatetime >= :datefrom");
-        whereArray.add("e.outdatetime <= :dateto");
-        whereArray.add("(e.outflag = 79 OR e.outflag = 88)");
-
-        if(calculateSearchRequestDto.getDevicenum() != null){
-            whereArray.add("e.indevicenum = "+calculateSearchRequestDto.getDevicenum());
-        }
-
-        if(calculateSearchRequestDto.getCarnum() != null) {
-            whereArray.add("e.carnum like '"+calculateSearchRequestDto.getCarnum()+"%'");
-        }
-
-        if(calculateSearchRequestDto.getMname() != null) {
-            whereArray.add("e.mname = '"+calculateSearchRequestDto.getMname()+"'");
-        }
-
-        qlString = qlString +" WHERE "+String.join(" AND ",whereArray);
-
-        TypedQuery<Tparkinfo> query = entityManager.createQuery(qlString, Tparkinfo.class);
-        query.setParameter("datefrom",commonComponent.stringToLocalDateTime(calculateSearchRequestDto.getDatefrom()));
-        query.setParameter("dateto",commonComponent.stringToLocalDateTime(calculateSearchRequestDto.getDateto()));
-
-        tparkinfoList = query.getResultList();
+        tparkinfoList = tparkinfoCustomRepository.customFindAll(calculateSearchRequestDto);
 
 
         if(tparkinfoList.size() > 0){
@@ -138,8 +104,8 @@ public class CalculateSearchServiceImpl implements CalculateSearchService{
     public HashMap<String, Object> summarySearch(CalculateSearchRequestDto calculateSearchRequestDto) {
 
         HashMap summary = summary(
-                commonComponent.stringToLocalDateTime(calculateSearchRequestDto.getDatefrom()),
-                commonComponent.stringToLocalDateTime(calculateSearchRequestDto.getDateto())
+                commonComponent.stringDateToLocalDateTime(calculateSearchRequestDto.getDatefrom(),"from"),
+                commonComponent.stringDateToLocalDateTime(calculateSearchRequestDto.getDateto(),"to")
         );
 
         HashMap<String, Object> resultMap = new HashMap<>();
@@ -171,7 +137,7 @@ public class CalculateSearchServiceImpl implements CalculateSearchService{
         HashMap<String, List<Map<String, Long>>> totdeviceList = new HashMap<>();
         HashMap<String, List<Map<String, Long>>> totdiscodeList = new HashMap<>();
 
-        LocalDate datefrom = commonComponent.stringToLocalDate(
+        LocalDate datefrom = commonComponent.stringDateToLocalDate(
                 calculateSearchRequestDto.getDatefrom().substring(
                         0,
                         Math.min(
@@ -181,7 +147,7 @@ public class CalculateSearchServiceImpl implements CalculateSearchService{
                 )
         );
 
-        LocalDate dateto = commonComponent.stringToLocalDate(
+        LocalDate dateto = commonComponent.stringDateToLocalDate(
                 calculateSearchRequestDto.getDateto().substring(
                         0,
                         Math.min(
@@ -194,34 +160,34 @@ public class CalculateSearchServiceImpl implements CalculateSearchService{
         LocalDate dateupdate = datefrom;
         while(!dateto.equals(dateupdate.plusDays(1))){
 
-            LocalDateTime datetimefrom = commonComponent.stringToLocalDateTime(
-                    commonComponent.localDateToString(dateupdate)+" 00:00:00"
+            LocalDateTime datetimefrom = commonComponent.stringDateTimeToLocalDateTime(
+                    commonComponent.localDateToStringDate(dateupdate)+" 00:00:00"
             );
 
-            LocalDateTime datetimeto = commonComponent.stringToLocalDateTime(
-                    commonComponent.localDateToString(dateupdate)+" 23:59:59"
+            LocalDateTime datetimeto = commonComponent.stringDateTimeToLocalDateTime(
+                    commonComponent.localDateToStringDate(dateupdate)+" 23:59:59"
             );
 
             HashMap<String, Object> summary = summary(datetimefrom, datetimeto);
 
 
-            totinList.put(commonComponent.localDateToString(dateupdate),(Long) summary.get("totin"));
+            totinList.put(commonComponent.localDateToStringDate(dateupdate),(Long) summary.get("totin"));
 
-            totoutList.put(commonComponent.localDateToString(dateupdate),(Map<String, Long>) summary.get("totout"));
+            totoutList.put(commonComponent.localDateToStringDate(dateupdate),(Map<String, Long>) summary.get("totout"));
 
-            totpaytypeList.put(commonComponent.localDateToString(dateupdate),(List<Map<String, Long>>) summary.get("totpaytype"));
+            totpaytypeList.put(commonComponent.localDateToStringDate(dateupdate),(List<Map<String, Long>>) summary.get("totpaytype"));
 
-            totdiscountList.put(commonComponent.localDateToString(dateupdate),(Map<String, Long>) summary.get("totdiscount"));
+            totdiscountList.put(commonComponent.localDateToStringDate(dateupdate),(Map<String, Long>) summary.get("totdiscount"));
 
-            totgraceList.put(commonComponent.localDateToString(dateupdate),(Map<String, Long>) summary.get("totgrace"));
+            totgraceList.put(commonComponent.localDateToStringDate(dateupdate),(Map<String, Long>) summary.get("totgrace"));
 
-            totcartypeList.put(commonComponent.localDateToString(dateupdate),(List<Map<String, Long>>) summary.get("totcartype"));
+            totcartypeList.put(commonComponent.localDateToStringDate(dateupdate),(List<Map<String, Long>>) summary.get("totcartype"));
 
-            totparktypeList.put(commonComponent.localDateToString(dateupdate),(List<Map<String, Long>>) summary.get("totparktype"));
+            totparktypeList.put(commonComponent.localDateToStringDate(dateupdate),(List<Map<String, Long>>) summary.get("totparktype"));
 
-            totdeviceList.put(commonComponent.localDateToString(dateupdate),(List<Map<String, Long>>) summary.get("totdevice"));
+            totdeviceList.put(commonComponent.localDateToStringDate(dateupdate),(List<Map<String, Long>>) summary.get("totdevice"));
 
-            totdiscodeList.put(commonComponent.localDateToString(dateupdate),(List<Map<String, Long>>) summary.get("totdiscode"));
+            totdiscodeList.put(commonComponent.localDateToStringDate(dateupdate),(List<Map<String, Long>>) summary.get("totdiscode"));
 
             dateupdate = dateupdate.plusDays(1);
         }
@@ -249,8 +215,8 @@ public class CalculateSearchServiceImpl implements CalculateSearchService{
 
 
         List<Object[]> deptcodeTparkinfo = tparkinfoRepository.findDeptcode(
-                commonComponent.stringToLocalDateTime(calculateSearchRequestDto.getDatefrom()),
-                commonComponent.stringToLocalDateTime(calculateSearchRequestDto.getDateto())
+                commonComponent.stringDateToLocalDateTime(calculateSearchRequestDto.getDatefrom(),"from"),
+                commonComponent.stringDateToLocalDateTime(calculateSearchRequestDto.getDateto(),"to")
         );
 
         /*
@@ -290,8 +256,8 @@ public class CalculateSearchServiceImpl implements CalculateSearchService{
         //tparkinfo.mid
 
         List<Tparkinfo> midTparkinfo = tparkinfoRepository.findAllByOutdatetimeGreaterThanEqualAndOutdatetimeLessThanEqual(
-                commonComponent.stringToLocalDateTime(calculateSearchRequestDto.getDatefrom()),
-                commonComponent.stringToLocalDateTime(calculateSearchRequestDto.getDateto())
+                commonComponent.stringDateToLocalDateTime(calculateSearchRequestDto.getDatefrom(),"from"),
+                commonComponent.stringDateToLocalDateTime(calculateSearchRequestDto.getDateto(),"to")
         );
 
         Map<String,List<Tparkinfo>> resultList = new HashMap<>();

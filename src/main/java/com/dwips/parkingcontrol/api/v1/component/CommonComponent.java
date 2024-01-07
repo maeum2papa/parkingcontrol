@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 public class CommonComponent {
 
     // "0000-00-00 00:00:00" -> LocalDateTime
-    public LocalDateTime stringToLocalDateTime(String dateString) {
+    public LocalDateTime stringDateTimeToLocalDateTime(String dateString) {
 
         // DateTimeFormatter를 사용하여 문자열을 LocalDateTime으로 변환
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -20,14 +20,14 @@ public class CommonComponent {
     }
 
     // LocalDateTime -> "0000-00-00 00:00:00"
-    public String localDateTimeToString(LocalDateTime dateTime) {
+    public String localDateTimeToStringDateTime(LocalDateTime dateTime) {
         // DateTimeFormatter를 사용하여 LocalDateTime을 문자열로 변환
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return dateTime.format(formatter);
     }
 
     // "0000-00-00" -> LocalDate
-    public LocalDate stringToLocalDate(String dateString) {
+    public LocalDate stringDateToLocalDate(String dateString) {
 
         // DateTimeFormatter를 사용하여 문자열을 LocalDate로 변환
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -35,11 +35,28 @@ public class CommonComponent {
 
     }
 
+
     // LocalDate -> "0000-00-00"
-    public String localDateToString(LocalDate dateTime) {
+    public String localDateToStringDate(LocalDate dateTime) {
         // DateTimeFormatter를 사용하여 LocalDate을 문자열로 변환
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return dateTime.format(formatter);
     }
+
+
+    // "0000-00-00" -> LocalDateTime(type "to" = 0000-00-00 23:59:59, type "from" = 0000-00-00 00:00:00)
+    public LocalDateTime stringDateToLocalDateTime(String dateString, String type) {
+
+        if(dateString.length() == 10){
+            if(type == "to"){
+                dateString = dateString + "23:59:59";
+            }else{
+                dateString = dateString + "00:00:00";
+            }
+        }
+
+        return stringDateTimeToLocalDateTime(dateString);
+    }
+
 
 }

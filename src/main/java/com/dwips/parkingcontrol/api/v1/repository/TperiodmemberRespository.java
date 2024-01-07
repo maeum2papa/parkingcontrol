@@ -15,4 +15,9 @@ public interface TperiodmemberRespository extends JpaRepository<Tperiodmember, L
     Tperiodmember findByCardno(Long cardno);
 
     Optional<Tperiodmember> findByXindex(Long xindex);
+
+    Tperiodmember findBySitenumAndGroupnumAndXindex(Long sitenum, Long groupnum, Long xindex);
+
+    Tperiodmember findBySitenumAndGroupnumAndCarnum(Long sitenum, Long groupnum, String carnum);
+
 }
