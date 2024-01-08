@@ -16,7 +16,7 @@ public class PeriodmemberRequestDto {
 
     private Long groupnum;
 
-    private String carnum; //single or multi
+    private String carnum;
 
     private String company; //회사명
 
