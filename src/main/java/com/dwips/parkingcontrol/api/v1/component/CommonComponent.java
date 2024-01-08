@@ -49,9 +49,9 @@ public class CommonComponent {
 
         if(dateString.length() == 10){
             if(type == "to"){
-                dateString = dateString + "23:59:59";
+                dateString = dateString + " 23:59:59";
             }else{
-                dateString = dateString + "00:00:00";
+                dateString = dateString + " 00:00:00";
             }
         }
 
