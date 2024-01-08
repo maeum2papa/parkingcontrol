@@ -10,11 +10,12 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NoregcarRequestDto {
+public class NoregcarDelRequestDto {
 
     private Long sitenum;
 
     private Long groupnum;
 
-    private Tnorecognition tnorecognition;
+    private Long xindex;
+
 }

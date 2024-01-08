@@ -1,6 +1,7 @@
 package com.dwips.parkingcontrol.api.v1.service;
 
 import com.dwips.parkingcontrol.api.v1.domain.Tnorecognition;
+import com.dwips.parkingcontrol.api.v1.dto.NoregcarDelRequestDto;
 import com.dwips.parkingcontrol.api.v1.dto.NoregcarRequestDto;
 import com.dwips.parkingcontrol.api.v1.repository.TnorecognitionRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +35,29 @@ public class NoregcarServiceImpl implements NoregcarService{
         resultMap.put("result",result);
 
         return resultMap;
+    }
+
+    @Override
+    public HashMap<String, Object> delete(NoregcarDelRequestDto noregcarDelRequestDto) {
+
+        Integer result = 0;
+
+        Tnorecognition tnorecognition = tnorecognitionRepository.findBySitenumAndGroupnumAndXindex(
+                noregcarDelRequestDto.getSitenum(),
+                noregcarDelRequestDto.getGroupnum(),
+                noregcarDelRequestDto.getXindex()
+        );
+
+        if(tnorecognition != null){
+            tnorecognitionRepository.delete(tnorecognition);
+            result = 1;
+        }
+
+        HashMap<String, Object> resultMap = new HashMap<>();
+
+        resultMap.put("result",result);
+
+        return resultMap;
+
     }
 }
