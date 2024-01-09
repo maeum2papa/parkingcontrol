@@ -61,8 +61,8 @@ public class Tbcardinfo {
     private String dealnum;
 
     //처리날자
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private LocalDate dealdate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd 00:00:00")
+    private LocalDateTime dealdate;
 
     //처리시간
     @Column(columnDefinition = "VARCHAR(10)")
