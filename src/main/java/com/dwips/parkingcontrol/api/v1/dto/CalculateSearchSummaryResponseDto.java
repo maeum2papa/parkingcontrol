@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.Map;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.NON_EMPTY)
 @Data
 @Builder
 @NoArgsConstructor

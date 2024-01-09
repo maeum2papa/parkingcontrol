@@ -1,8 +1,10 @@
 package com.dwips.parkingcontrol.api.v1.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * tparkingnum(차량대수)
@@ -12,6 +14,8 @@ import lombok.Data;
 @Data
 @Entity
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Tparkingnum {
 
     @Id

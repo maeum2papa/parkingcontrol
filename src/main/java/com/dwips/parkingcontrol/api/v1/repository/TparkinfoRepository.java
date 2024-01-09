@@ -2,6 +2,7 @@ package com.dwips.parkingcontrol.api.v1.repository;
 
 import com.dwips.parkingcontrol.api.v1.domain.Tdiscountinfo;
 import com.dwips.parkingcontrol.api.v1.domain.Tparkinfo;
+import com.dwips.parkingcontrol.api.v1.domain.Tparkingnum;
 import com.dwips.parkingcontrol.api.v1.domain.Tperiodinout;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -121,4 +122,5 @@ public interface TparkinfoRepository extends JpaRepository<Tparkinfo, Long> {
             @Param("datefrom") LocalDateTime datefrom,
             @Param("dateto")LocalDateTime dateto
     );
+
 }
