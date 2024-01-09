@@ -73,4 +73,11 @@ public class Tdeviceinfo {
     @Column(columnDefinition = "VARCHAR(1)")
     private String useyn;
 
+    @Column(columnDefinition = "VARCHAR(100)")
+    private String linkip;
+
+    @Column(columnDefinition = "INT")
+    private Long iotype;
+
+
 }
