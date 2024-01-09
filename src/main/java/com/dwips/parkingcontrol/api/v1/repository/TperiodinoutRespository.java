@@ -39,4 +39,5 @@ public interface TperiodinoutRespository extends JpaRepository<Tperiodinout,Long
 
     Tperiodinout findByXindex(Long xindex);
 
+
 }
