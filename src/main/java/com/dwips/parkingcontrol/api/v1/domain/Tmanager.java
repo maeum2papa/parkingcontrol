@@ -2,8 +2,10 @@ package com.dwips.parkingcontrol.api.v1.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -18,6 +20,8 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Tmanager {
 
     @Id
@@ -47,19 +51,19 @@ public class Tmanager {
 
     //관리자이름
     @Column(columnDefinition = "VARCHAR(30)")
-    private Long name;
+    private String name;
 
     //관리자전화번호
     @Column(columnDefinition = "VARCHAR(30)")
-    private Long tel;
+    private String tel;
 
     //근무자소속
     @Column(columnDefinition = "VARCHAR(40)")
-    private Long dept;
+    private String dept;
 
     //사용유무
     @Column(columnDefinition = "VARCHAR(1)")
-    private Long useyn;
+    private String useyn;
 
     //등록일
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")

@@ -10,5 +10,5 @@ public interface TparkingnumRepository extends JpaRepository<Tparkingnum,Long> {
 
     List<Tparkingnum> findAllBySitenum(Long sitenum);
 
-    Tparkingnum findBySitenumAndGroupnum(Long sitenum, Long groupnum);
+    Tparkingnum findBySitenumAndGroupnumAndXindex(Long sitenum, Long groupnum, Long xindex);
 }

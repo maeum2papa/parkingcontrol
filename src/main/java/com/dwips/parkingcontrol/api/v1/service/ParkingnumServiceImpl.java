@@ -56,9 +56,10 @@ public class ParkingnumServiceImpl implements ParkingnumService{
         Integer result = 0;
         List<Tparkingnum> tparkingnumList = new ArrayList<>();
 
-        Tparkingnum tparkingnum = tparkingnumRepository.findBySitenumAndGroupnum(
+        Tparkingnum tparkingnum = tparkingnumRepository.findBySitenumAndGroupnumAndXindex(
                 parkingnumRequestDto.getSitenum(),
-                parkingnumRequestDto.getGroupnum()
+                parkingnumRequestDto.getGroupnum(),
+                parkingnumRequestDto.getTparkingnum().getXindex()
         );
 
         if(tparkingnum!=null) {
