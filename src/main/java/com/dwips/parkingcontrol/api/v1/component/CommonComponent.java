@@ -13,6 +13,8 @@ public class CommonComponent {
     // "0000-00-00 00:00:00" -> LocalDateTime
     public LocalDateTime stringDateTimeToLocalDateTime(String dateString) {
 
+        if(dateString == null) return null;
+
         // DateTimeFormatter를 사용하여 문자열을 LocalDateTime으로 변환
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return LocalDateTime.parse(dateString, formatter);
@@ -21,6 +23,9 @@ public class CommonComponent {
 
     // LocalDateTime -> "0000-00-00 00:00:00"
     public String localDateTimeToStringDateTime(LocalDateTime dateTime) {
+
+        if(dateTime == null) return null;
+
         // DateTimeFormatter를 사용하여 LocalDateTime을 문자열로 변환
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return dateTime.format(formatter);
@@ -28,6 +33,8 @@ public class CommonComponent {
 
     // "0000-00-00" -> LocalDate
     public LocalDate stringDateToLocalDate(String dateString) {
+
+        if(dateString == null) return null;
 
         // DateTimeFormatter를 사용하여 문자열을 LocalDate로 변환
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -38,6 +45,9 @@ public class CommonComponent {
 
     // LocalDate -> "0000-00-00"
     public String localDateToStringDate(LocalDate dateTime) {
+
+        if(dateTime == null) return null;
+
         // DateTimeFormatter를 사용하여 LocalDate을 문자열로 변환
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return dateTime.format(formatter);
@@ -46,6 +56,8 @@ public class CommonComponent {
 
     // "0000-00-00" -> LocalDateTime(type "to" = 0000-00-00 23:59:59, type "from" = 0000-00-00 00:00:00)
     public LocalDateTime stringDateToLocalDateTime(String dateString, String type) {
+
+        if(dateString == null) return null;
 
         if(dateString.length() == 10){
             if(type == "to"){

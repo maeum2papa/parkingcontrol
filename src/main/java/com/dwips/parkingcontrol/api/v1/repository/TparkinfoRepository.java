@@ -123,4 +123,5 @@ public interface TparkinfoRepository extends JpaRepository<Tparkinfo, Long> {
             @Param("dateto")LocalDateTime dateto
     );
 
+    Tparkinfo findBySitenumAndGroupnumAndXindex(Long sitenum, Long groupnum, Long xindex);
 }
