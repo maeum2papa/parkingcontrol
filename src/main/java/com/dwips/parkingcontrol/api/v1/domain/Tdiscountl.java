@@ -2,8 +2,10 @@ package com.dwips.parkingcontrol.api.v1.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -25,6 +27,8 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Tdiscountl {
 
     @Id
@@ -71,5 +75,9 @@ public class Tdiscountl {
     //할인권타이틀
     @Column(columnDefinition = "VARCHAR(11)")
     private String title;
+
+    //?
+    @Column(columnDefinition = "INT")
+    private Long ticketon;
 
 }
