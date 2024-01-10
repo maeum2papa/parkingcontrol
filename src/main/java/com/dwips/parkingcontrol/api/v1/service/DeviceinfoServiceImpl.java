@@ -96,6 +96,7 @@ public class DeviceinfoServiceImpl implements DeviceinfoService{
 
         if(tdeviceinfo != null){
             tdeviceinfoRepository.delete(tdeviceinfo);
+            result = 1;
         }
 
         HashMap<String, Object> resultMap = new HashMap<>();
