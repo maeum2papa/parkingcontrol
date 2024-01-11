@@ -1,6 +1,6 @@
 package com.dwips.parkingcontrol.api.v1.dto;
 
-import com.dwips.parkingcontrol.api.v1.domain.Tmanager;
+import com.dwips.parkingcontrol.api.v1.domain.Tdisdept;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,9 +14,9 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ManagerResponseDto {
+public class DisdeptResponseDto {
 
     private Integer result;
 
-    private List<Tmanager> tmanager;
+    private List<Tdisdept> tdisdept;
 }

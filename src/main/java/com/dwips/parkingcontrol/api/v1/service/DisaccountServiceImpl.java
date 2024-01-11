@@ -26,6 +26,8 @@ public class DisaccountServiceImpl implements DisaccountService{
     @Override
     public HashMap<String, Object> search(DisaccountRequestDto disaccountRequestDto) {
 
+        Integer result = 0;
+
         List<Tdisaccount> tdisaccountList = tdisaccountCustomRepository.customFindAll(
                 disaccountRequestDto.getSitenum(),
                 disaccountRequestDto.getGroupnum(),
@@ -33,9 +35,15 @@ public class DisaccountServiceImpl implements DisaccountService{
                 disaccountRequestDto.getName()
         );
 
+        if(tdisaccountList.isEmpty()){
+            tdisaccountList = null;
+        }else{
+            result = 1;
+        }
+
         HashMap<String,Object> resultMap = new HashMap<>();
 
-        resultMap.put("result",1);
+        resultMap.put("result",result);
         resultMap.put("tdisaccount",tdisaccountList);
 
         return resultMap;
