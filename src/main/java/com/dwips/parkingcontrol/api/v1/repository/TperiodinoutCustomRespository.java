@@ -44,7 +44,7 @@ public class TperiodinoutCustomRespository {
         }
 
         if(cardid != null) {
-            whereArray.add("e.department '= "+cardid+"'");
+            whereArray.add("e.department = '"+cardid+"'");
         }
 
         if(name != null) {
