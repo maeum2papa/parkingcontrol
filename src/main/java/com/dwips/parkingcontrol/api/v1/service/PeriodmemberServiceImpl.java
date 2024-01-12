@@ -44,6 +44,8 @@ public class PeriodmemberServiceImpl implements PeriodmemberService{
     @Override
     public HashMap<String, Object> search(PeriodmemberRequestDto periodmemberRequestDto) {
 
+        Integer result = 0;
+
         String carnum = (periodmemberRequestDto.getCarnum()!=null)?periodmemberRequestDto.getCarnum():null;
         LocalDateTime datefrom  = null;
         LocalDateTime dateto  = null;
@@ -108,9 +110,13 @@ public class PeriodmemberServiceImpl implements PeriodmemberService{
 
         HashMap<String, Object> resultMap = new HashMap<>();
 
-        if(tperiodmemberList.isEmpty()) tperiodmemberList = null;
+        if(tperiodmemberList.isEmpty()){
+            tperiodmemberList = null;
+        }else{
+            result = 1;
+        }
 
-        resultMap.put("result",1);
+        resultMap.put("result",result);
         resultMap.put("tperiodmember",tperiodmemberList);
 
         return resultMap;

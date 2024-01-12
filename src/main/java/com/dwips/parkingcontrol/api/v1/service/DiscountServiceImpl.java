@@ -24,14 +24,22 @@ public class DiscountServiceImpl implements DiscountService{
     @Override
     public HashMap<String, Object> search(DiscountRequestDto discountRequestDto) {
 
+        Integer result = 0;
+
         List<Tdiscountl> tdiscountlList = tdiscountlRepository.findAllBySitenumAndGroupnum(
                 discountRequestDto.getSitenum(),
                 discountRequestDto.getGroupnum()
         );
 
+        if(!tdiscountlList.isEmpty()){
+            result = 1;
+        }else{
+            tdiscountlList = null;
+        }
+
         HashMap<String, Object> resultMap = new HashMap<>();
 
-        resultMap.put("result",1);
+        resultMap.put("result",result);
         resultMap.put("tdiscount",tdiscountlList);
 
         return resultMap;
@@ -40,13 +48,21 @@ public class DiscountServiceImpl implements DiscountService{
     @Override
     public HashMap<String, Object> save(DiscountRequestDto discountRequestDto) {
 
+        Integer result = 0;
+
         List<Tdiscountl> tdiscountlList = new ArrayList<>();
 
         tdiscountlList.add(tdiscountlRepository.save(discountRequestDto.getTdiscount()));
 
+        if(!tdiscountlList.isEmpty()){
+            result = 1;
+        }else{
+            tdiscountlList = null;
+        }
+
         HashMap<String, Object> resultMap = new HashMap<>();
 
-        resultMap.put("result",1);
+        resultMap.put("result",result);
         resultMap.put("tdiscount",tdiscountlList);
 
         return resultMap;
@@ -54,6 +70,8 @@ public class DiscountServiceImpl implements DiscountService{
 
     @Override
     public HashMap<String, Object> update(DiscountRequestDto discountRequestDto) {
+
+        Integer result = 0;
 
         List<Tdiscountl> tdiscountlList = new ArrayList<>();
 
@@ -66,11 +84,14 @@ public class DiscountServiceImpl implements DiscountService{
         if(tdiscount!=null){
             tdiscountlRepository.save(tdiscount);
             tdiscountlList.add(tdiscount);
+            result = 1;
+        }else{
+            tdiscountlList = null;
         }
 
         HashMap<String, Object> resultMap = new HashMap<>();
 
-        resultMap.put("result",1);
+        resultMap.put("result",result);
         resultMap.put("tdiscount",tdiscountlList);
 
         return resultMap;
@@ -78,6 +99,8 @@ public class DiscountServiceImpl implements DiscountService{
 
     @Override
     public HashMap<String, Object> delete(DiscountRequestDto discountRequestDto) {
+
+        Integer result = 0;
 
         HashMap<String, Object> resultMap = new HashMap<>();
 
@@ -89,9 +112,10 @@ public class DiscountServiceImpl implements DiscountService{
 
         if(tdiscount!=null){
             tdiscountlRepository.delete(tdiscount);
+            result = 1;
         }
 
-        resultMap.put("result",1);
+        resultMap.put("result",result);
 
         return resultMap;
     }

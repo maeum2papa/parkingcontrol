@@ -57,9 +57,15 @@ public class DisdeptServiceImpl implements DisdeptService{
 
         tdisdeptList.add(tdisdeptRepository.save(disdpeptRequestDto.getTdisdept()));
 
+        if(!tdisdeptList.isEmpty()){
+            result = 1;
+        }else{
+            tdisdeptList = null;
+        }
+
         HashMap<String,Object> resultMap = new HashMap<>();
 
-        resultMap.put("result",1);
+        resultMap.put("result",result);
         resultMap.put("tdisdept",tdisdeptList);
 
         return resultMap;

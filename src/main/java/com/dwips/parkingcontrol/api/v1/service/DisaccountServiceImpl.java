@@ -52,13 +52,21 @@ public class DisaccountServiceImpl implements DisaccountService{
     @Override
     public HashMap<String, Object> save(DisaccountRequestDto disaccountRequestDto) {
 
+        Integer result = 0;
+
         List<Tdisaccount> tdisaccountList = new ArrayList<>();
 
         tdisaccountList.add(tdisaccountRepository.save(disaccountRequestDto.getTdisaccount()));
 
+        if(!tdisaccountList.isEmpty()){
+            result = 1;
+        }else{
+            tdisaccountList = null;
+        }
+
         HashMap<String,Object> resultMap = new HashMap<>();
 
-        resultMap.put("result",1);
+        resultMap.put("result",result);
         resultMap.put("tdisaccount",tdisaccountList);
 
         return resultMap;
@@ -66,6 +74,8 @@ public class DisaccountServiceImpl implements DisaccountService{
 
     @Override
     public HashMap<String, Object> update(DisaccountRequestDto disaccountRequestDto) {
+
+        Integer result = 0;
 
         List<Tdisaccount> tdisaccountList = new ArrayList<>();
 
@@ -78,11 +88,14 @@ public class DisaccountServiceImpl implements DisaccountService{
         if(tdisaccount!=null){
             tdisaccountRepository.save(disaccountRequestDto.getTdisaccount());
             tdisaccountList.add(tdisaccount);
+            result = 1;
+        }else{
+            tdisaccountList = null;
         }
 
         HashMap<String,Object> resultMap = new HashMap<>();
 
-        resultMap.put("result",1);
+        resultMap.put("result",result);
         resultMap.put("tdisaccount",tdisaccountList);
 
         return resultMap;
@@ -90,6 +103,8 @@ public class DisaccountServiceImpl implements DisaccountService{
 
     @Override
     public HashMap<String, Object> delete(DisaccountRequestDto disaccountRequestDto) {
+
+        Integer result = 0;
 
         Tdisaccount tdisaccount = tdisaccountRepository.findBySitenumAndGroupnumAndXindex(
             disaccountRequestDto.getSitenum(),
@@ -99,11 +114,12 @@ public class DisaccountServiceImpl implements DisaccountService{
 
         if(tdisaccount!=null){
             tdisaccountRepository.delete(tdisaccount);
+            result = 1;
         }
 
         HashMap<String,Object> resultMap = new HashMap<>();
 
-        resultMap.put("result",1);
+        resultMap.put("result",result);
 
         return resultMap;
     }

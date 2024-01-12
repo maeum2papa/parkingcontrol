@@ -103,14 +103,18 @@ public class CalculateSearchServiceImpl implements CalculateSearchService{
     @Override
     public HashMap<String, Object> summarySearch(CalculateSearchRequestDto calculateSearchRequestDto) {
 
+        Integer result = 0;
+
         HashMap summary = summary(
                 commonComponent.stringDateToLocalDateTime(calculateSearchRequestDto.getDatefrom(),"from"),
                 commonComponent.stringDateToLocalDateTime(calculateSearchRequestDto.getDateto(),"to")
         );
 
+        result = 1;
+
         HashMap<String, Object> resultMap = new HashMap<>();
 
-        resultMap.put("result",0);
+        resultMap.put("result",result);
         resultMap.put("totin",(long) summary.getOrDefault("totin",null));
         resultMap.put("totout",(Map<String, Long>) summary.getOrDefault("totout",null));
         resultMap.put("totpaytype",(List<Map<String, Long>>) summary.getOrDefault("totpaytype",null));
@@ -126,6 +130,8 @@ public class CalculateSearchServiceImpl implements CalculateSearchService{
 
     @Override
     public HashMap<String, Object> summaryDaysSearch(CalculateSearchRequestDto calculateSearchRequestDto) {
+
+        Integer result = 0;
 
         HashMap<String, Long> totinList = new HashMap<>();
         HashMap<String, Map<String,Long>> totoutList = new HashMap<>();
@@ -190,12 +196,14 @@ public class CalculateSearchServiceImpl implements CalculateSearchService{
             totdiscodeList.put(commonComponent.localDateToStringDate(dateupdate),(List<Map<String, Long>>) summary.get("totdiscode"));
 
             dateupdate = dateupdate.plusDays(1);
+
+            result = 1;
         }
 
 
         HashMap<String, Object> resultMap = new HashMap<>();
 
-        resultMap.put("result",0);
+        resultMap.put("result",result);
         resultMap.put("totin",totinList);
         resultMap.put("totout",totoutList);
         resultMap.put("totpaytype",totpaytypeList);
@@ -213,6 +221,7 @@ public class CalculateSearchServiceImpl implements CalculateSearchService{
     @Override
     public Map<String, Object> deptcodesSearch(CalculateSearchRequestDto calculateSearchRequestDto) {
 
+        Integer result = 0;
 
         List<Object[]> deptcodeTparkinfo = tparkinfoRepository.findDeptcode(
                 commonComponent.stringDateToLocalDateTime(calculateSearchRequestDto.getDatefrom(),"from"),
@@ -243,9 +252,13 @@ public class CalculateSearchServiceImpl implements CalculateSearchService{
                         Collectors.mapping(map -> (Tparkinfo) map[0], Collectors.toList())
                 ));
 
+        if(!resultList.isEmpty()){
+            result = 1;
+        }
+
         HashMap<String, Object> resultMap = new HashMap<>();
 
-        resultMap.put("result",1);
+        resultMap.put("result",result);
         resultMap.put("tparkinfo",resultList);
 
         return resultMap;
@@ -254,6 +267,8 @@ public class CalculateSearchServiceImpl implements CalculateSearchService{
     @Override
     public Map<String, Object> midsSearch(CalculateSearchRequestDto calculateSearchRequestDto) {
         //tparkinfo.mid
+
+        Integer result = 0;
 
         List<Tparkinfo> midTparkinfo = tparkinfoRepository.findAllByOutdatetimeGreaterThanEqualAndOutdatetimeLessThanEqual(
                 commonComponent.stringDateToLocalDateTime(calculateSearchRequestDto.getDatefrom(),"from"),
@@ -276,9 +291,13 @@ public class CalculateSearchServiceImpl implements CalculateSearchService{
             }
         }
 
+        if(!resultList.isEmpty()) {
+            result = 1;
+        }
+
         HashMap<String, Object> resultMap = new HashMap<>();
 
-        resultMap.put("result",1);
+        resultMap.put("result",result);
         resultMap.put("tparkinfo",resultList);
 
         return resultMap;
@@ -287,9 +306,13 @@ public class CalculateSearchServiceImpl implements CalculateSearchService{
     //요약 공통
     public HashMap<String,Object> summary(LocalDateTime datefrom, LocalDateTime dateto){
 
+        Integer result = 0;
+
+        result = 1;
+
         HashMap<String,Object> resultMap = new HashMap<>();
 
-        resultMap.put("result",0);
+        resultMap.put("result",result);
         resultMap.put("totin",(long) tparkinfoRepository.findAllByIndatetimeGreaterThanEqualAndIndatetimeLessThanEqual(
                 datefrom,
                 dateto

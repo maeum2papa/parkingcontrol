@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.NON_EMPTY)
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 @Data
 @Builder
 @NoArgsConstructor

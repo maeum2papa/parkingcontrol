@@ -48,12 +48,20 @@ public class DeviceinfoServiceImpl implements DeviceinfoService{
     @Override
     public HashMap<String, Object> save(DeviceinfoRequestDto deviceinfoRequestDto) {
 
+        Integer result = 0;
+
         List<Tdeviceinfo> deviceinfoList = new ArrayList<>();
         deviceinfoList.add(tdeviceinfoRepository.save(deviceinfoRequestDto.getTdeviceinfo()));
 
+        if(!deviceinfoList.isEmpty()){
+            result = 1;
+        }else{
+            deviceinfoList = null;
+        }
+
         HashMap<String, Object> resultMap = new HashMap<>();
 
-        resultMap.put("result",1);
+        resultMap.put("result",result);
         resultMap.put("deviceinfo",deviceinfoList);
 
         return resultMap;

@@ -1,6 +1,6 @@
 package com.dwips.parkingcontrol.api.v1.dto;
 
-import com.dwips.parkingcontrol.api.v1.domain.Tperiodmember;
+import com.dwips.parkingcontrol.api.v1.domain.Tholiday;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,10 +14,9 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PeriodmemberResponseDto {
+public class HolidayResponseDto {
 
     private Integer result;
 
-    private List<Tperiodmember> tperiodmember;
-
+    private List<Tholiday> tholiday;
 }

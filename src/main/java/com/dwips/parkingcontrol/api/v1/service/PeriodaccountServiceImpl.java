@@ -30,6 +30,8 @@ public class PeriodaccountServiceImpl implements PeriodaccountService{
     @Override
     public HashMap<String, Object> search(PeriodaccountRequestDto periodaccountRequestDto) {
 
+        Integer result = 0;
+
         List<Tperiodaccount> tperiodaccountList = tperiodaccountCustomResitory.customFindAll(
                 periodaccountRequestDto.getSitenum(),
                 periodaccountRequestDto.getGroupnum(),
@@ -39,9 +41,15 @@ public class PeriodaccountServiceImpl implements PeriodaccountService{
                 commonComponent.stringDateToLocalDateTime(periodaccountRequestDto.getDateto(),"to")
         );
 
+        if(!tperiodaccountList.isEmpty()){
+            result = 1;
+        }else{
+            tperiodaccountList = null;
+        }
+
         HashMap<String, Object> resultMap = new HashMap<>();
 
-        resultMap.put("result",1);
+        resultMap.put("result",result);
         resultMap.put("tperiodaccount",tperiodaccountList);
 
         return resultMap;
@@ -50,13 +58,21 @@ public class PeriodaccountServiceImpl implements PeriodaccountService{
     @Override
     public HashMap<String, Object> save(PeriodaccountRequestDto periodaccountRequestDto) {
 
+        Integer result = 0;
+
         List<Tperiodaccount> tperiodaccountList = new ArrayList<>();
 
         tperiodaccountList.add(tperiodaccountResitory.save(periodaccountRequestDto.getTperiodaccount()));
 
+        if(!tperiodaccountList.isEmpty()){
+            result = 1;
+        }else{
+            tperiodaccountList = null;
+        }
+
         HashMap<String, Object> resultMap = new HashMap<>();
 
-        resultMap.put("result",1);
+        resultMap.put("result",result);
         resultMap.put("tperiodaccount",tperiodaccountList);
 
         return resultMap;
