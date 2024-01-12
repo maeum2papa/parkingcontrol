@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TblackListRepository extends JpaRepository<Tblacklist,Long> {
     Tblacklist findBySitenumAndGroupnumAndXindex(Long sitenum, Long groupnum, Long xindex);
+
+    Tblacklist findBySitenumAndGroupnumAndCarnum(Long sitenum, Long groupnum, String carnum);
 }

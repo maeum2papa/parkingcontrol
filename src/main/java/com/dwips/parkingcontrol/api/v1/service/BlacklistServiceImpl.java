@@ -108,11 +108,21 @@ public class BlacklistServiceImpl implements BlacklistService{
 
         Integer result = 0;
 
-        Tblacklist tblacklist = tblackListRepository.findBySitenumAndGroupnumAndXindex(
-                blackListRequestDto.getSitenum(),
-                blackListRequestDto.getGroupnum(),
-                blackListRequestDto.getXindex()
-        );
+        Tblacklist tblacklist = null;
+
+        if(blackListRequestDto.getXindex() != null){
+            tblacklist = tblackListRepository.findBySitenumAndGroupnumAndXindex(
+                    blackListRequestDto.getSitenum(),
+                    blackListRequestDto.getGroupnum(),
+                    blackListRequestDto.getXindex()
+            );
+        }else if(blackListRequestDto.getCarnum() != null){
+            tblacklist = tblackListRepository.findBySitenumAndGroupnumAndCarnum(
+                    blackListRequestDto.getSitenum(),
+                    blackListRequestDto.getGroupnum(),
+                    blackListRequestDto.getCarnum()
+            );
+        }
 
         if(tblacklist!=null){
             tblackListRepository.delete(tblacklist);
