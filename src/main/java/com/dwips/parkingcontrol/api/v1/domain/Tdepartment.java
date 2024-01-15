@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Ttdepartment {
+public class Tdepartment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
