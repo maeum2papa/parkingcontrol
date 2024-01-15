@@ -11,4 +11,8 @@ public interface TwelfareRepository extends JpaRepository<Twelfare,Long> {
     List<Twelfare> findAllByCarnumAndStarddateLessThanEqualAndEnddateGreaterThanEqual(String carnum, LocalDate starddate, LocalDate enddate);
 
     List<Twelfare> findAllBySitenumAndGroupnumAndCarnum(Long sitenum, Long groupnum, String carnum);
+
+    Twelfare findBySitenumAndGroupnumAndXindex(Long sitenum, Long groupnum, Long xindex);
+
+    Twelfare findBySitenumAndGroupnumAndCarnum(Long sitenum, Long groupnum, String carnum);
 }

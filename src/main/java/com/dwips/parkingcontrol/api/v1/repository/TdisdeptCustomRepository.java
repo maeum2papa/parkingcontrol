@@ -32,6 +32,8 @@ public class TdisdeptCustomRepository {
             whereArray.add("e.deptname = '"+deptname+"'");
         }
 
+        qString = qString +" WHERE "+String.join(" AND ",whereArray);
+
         TypedQuery<Tdisdept> query = entityManager.createQuery(qString, Tdisdept.class);
 
         return query.getResultList();

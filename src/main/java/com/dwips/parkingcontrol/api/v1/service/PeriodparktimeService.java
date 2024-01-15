@@ -1,6 +1,6 @@
 package com.dwips.parkingcontrol.api.v1.service;
 
-import com.dwips.parkingcontrol.api.v1.repository.PeriodparktimeRequestDto;
+import com.dwips.parkingcontrol.api.v1.dto.PeriodparktimeRequestDto;
 
 import java.util.HashMap;
 

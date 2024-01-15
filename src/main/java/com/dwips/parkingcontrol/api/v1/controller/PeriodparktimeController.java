@@ -1,9 +1,8 @@
 package com.dwips.parkingcontrol.api.v1.controller;
 
 import com.dwips.parkingcontrol.api.v1.domain.Tperiodparktime;
-import com.dwips.parkingcontrol.api.v1.repository.PeriodparktimeRequestDto;
-import com.dwips.parkingcontrol.api.v1.repository.PeriodparktimeResponseDto;
-import com.dwips.parkingcontrol.api.v1.service.DeviceinfoService;
+import com.dwips.parkingcontrol.api.v1.dto.PeriodparktimeRequestDto;
+import com.dwips.parkingcontrol.api.v1.dto.PeriodparktimeResponseDto;
 import com.dwips.parkingcontrol.api.v1.service.PeriodparktimeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

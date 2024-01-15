@@ -1,6 +1,6 @@
-package com.dwips.parkingcontrol.api.v1.repository;
+package com.dwips.parkingcontrol.api.v1.dto;
 
-import com.dwips.parkingcontrol.api.v1.domain.Tperiodparktime;
+import com.dwips.parkingcontrol.api.v1.domain.Twelfare;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,9 +12,9 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PeriodparktimeResponseDto {
+public class WelfareResponseDto {
 
     private Integer result;
 
-    private List<Tperiodparktime> tperiodparktime;
+    private List<Twelfare> twelfare;
 }

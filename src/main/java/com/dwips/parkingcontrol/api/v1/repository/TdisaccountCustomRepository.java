@@ -34,6 +34,8 @@ public class TdisaccountCustomRepository {
             whereArray.add("e.name = '"+name+"'");
         }
 
+        qlString = qlString +" WHERE "+String.join(" AND ",whereArray);
+
         TypedQuery<Tdisaccount> query = entityManager.createQuery(qlString, Tdisaccount.class);
 
         return query.getResultList();

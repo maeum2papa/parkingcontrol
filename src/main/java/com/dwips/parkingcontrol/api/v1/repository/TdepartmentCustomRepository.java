@@ -41,6 +41,7 @@ public class TdepartmentCustomRepository {
             whereArray.add("e.name = '"+name+"'");
         }
 
+        qlQuery = qlQuery +" WHERE "+String.join(" AND ",whereArray);
 
         TypedQuery<Tdepartment> query = entityManager.createQuery(qlQuery,Tdepartment.class);
 

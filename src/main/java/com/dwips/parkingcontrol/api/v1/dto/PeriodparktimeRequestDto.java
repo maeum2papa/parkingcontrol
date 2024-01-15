@@ -1,4 +1,4 @@
-package com.dwips.parkingcontrol.api.v1.repository;
+package com.dwips.parkingcontrol.api.v1.dto;
 
 import com.dwips.parkingcontrol.api.v1.domain.Tperiodparktime;
 import lombok.AllArgsConstructor;
