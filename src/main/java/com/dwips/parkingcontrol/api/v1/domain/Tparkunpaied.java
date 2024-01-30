@@ -29,6 +29,9 @@ public class Tparkunpaied {
     @Column(columnDefinition = "INT")
     private Long groupnum;
 
+    @Column(columnDefinition = "INT")
+    private Long devicenum;
+
     //차량번호
     @Column(columnDefinition = "VARCHAR(30)")
     private String carnum;
