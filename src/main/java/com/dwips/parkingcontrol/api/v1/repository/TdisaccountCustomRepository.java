@@ -24,7 +24,7 @@ public class TdisaccountCustomRepository {
         List<String> whereArray = new ArrayList<>();
 
         whereArray.add("e.sitenum = "+sitenum);
-        whereArray.add("e.grounum = "+groupnum);
+        whereArray.add("e.groupnum = "+groupnum);
 
         if(id!=null){
             whereArray.add("e.id = '"+id+"'");
