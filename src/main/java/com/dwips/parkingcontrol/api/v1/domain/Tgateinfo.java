@@ -34,4 +34,14 @@ public class Tgateinfo {
     @Column(columnDefinition = "VARCHAR(10)")
     private String iotype;
 
+    //아이피
+    @Column(columnDefinition = "VARCHAR(30)")
+    private String gateip;
+
+
+    //
+    @Column(columnDefinition = "VARCHAR(30)")
+    private String command;
+
+
 }

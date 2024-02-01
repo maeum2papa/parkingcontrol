@@ -2,7 +2,12 @@ package com.dwips.parkingcontrol.api.v1.component;
 
 import org.springframework.stereotype.Component;
 
-import java.text.DateFormat;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -71,4 +76,49 @@ public class CommonComponent {
     }
 
 
+    // TCP Client Sender
+    public String TcpClientSender(String ip, Integer port, String message){
+
+        String serverResponse = "";
+
+        try{
+
+            // 소켓 생성 및 연결
+            Socket socket = new Socket(ip, port);
+
+            // 전송할 문자열
+            message = "\u0002"+"gateip-command(192.168.0.140-RL11)"+"\u0003";
+
+            // 문자열을 바이트로 변환하여 소켓으로 전송
+            OutputStream output = socket.getOutputStream();
+            output.write(message.getBytes(StandardCharsets.UTF_8));
+            output.flush();
+
+
+            // 소켓으로부터 서버 응답 수신
+            InputStream inputStream = socket.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+
+            StringBuilder responseBuilder = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                responseBuilder.append(line);
+            }
+
+            serverResponse = responseBuilder.toString();
+
+            // 소켓 및 스트림 닫기
+            reader.close();
+            output.close();
+            inputStream.close();
+            socket.close();
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return serverResponse;
+    }
 }

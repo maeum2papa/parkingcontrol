@@ -30,6 +30,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	runtimeOnly 'com.mysql:mysql-connector-j'
+
+//	implementation 'org.springframework.boot:spring-boot-starter-integration'
+//	implementation 'org.springframework.integration:spring-integration-ip'
 }
 
 tasks.named('test') {
