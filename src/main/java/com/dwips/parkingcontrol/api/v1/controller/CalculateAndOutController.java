@@ -1,5 +1,6 @@
 package com.dwips.parkingcontrol.api.v1.controller;
 
+import com.dwips.parkingcontrol.api.v1.component.CommonComponent;
 import com.dwips.parkingcontrol.api.v1.dto.CalculateAndOutRequestDto;
 import com.dwips.parkingcontrol.api.v1.dto.CalculateAndOutResponseDto;
 import com.dwips.parkingcontrol.api.v1.dto.CalculateRequestDto;
@@ -20,12 +21,15 @@ import java.util.HashMap;
 @RequestMapping("/api/v1")
 public class CalculateAndOutController {
 
+    private final CommonComponent commonComponent;
+
     private final CalculateAndOutService calculateAndOutService;
 
     @PostMapping("/calculateandout")
     public CalculateAndOutResponseDto calculateandout(@RequestBody CalculateAndOutRequestDto calculateAndOutRequestDto){
 
-        log.info("정산 & 출차 저장 : {}",calculateAndOutRequestDto.toString());
+
+        commonComponent.logJson("정산 & 출차 저장 요청",calculateAndOutRequestDto);
 
         HashMap<String, Object> result = new HashMap<>();
 
@@ -44,8 +48,12 @@ public class CalculateAndOutController {
         }
 
 
-        return CalculateAndOutResponseDto.builder()
+        CalculateAndOutResponseDto response = CalculateAndOutResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .build();
+
+        commonComponent.logJson("정산 & 출차 저장 응답",response);
+
+        return response;
     }
 }

@@ -1,6 +1,7 @@
 package com.dwips.parkingcontrol.api.v1.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
  *             1:가능 0:불능
  *     parklevel	0:일반, 1:홀짝, 2:10부제, 3:요일제
  */
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 @Data
 @Entity
 @Builder

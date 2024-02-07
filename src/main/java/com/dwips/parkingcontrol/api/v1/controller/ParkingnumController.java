@@ -1,6 +1,7 @@
 package com.dwips.parkingcontrol.api.v1.controller;
 
 
+import com.dwips.parkingcontrol.api.v1.component.CommonComponent;
 import com.dwips.parkingcontrol.api.v1.domain.Tparkingnum;
 import com.dwips.parkingcontrol.api.v1.dto.ParkingnumRequestDto;
 import com.dwips.parkingcontrol.api.v1.dto.ParkingnumResponseDto;
@@ -18,45 +19,62 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class ParkingnumController {
 
+    private final CommonComponent commonComponent;
+
     private final ParkingnumService parkingnumService;
 
     @GetMapping("/parkingnum")
     public ParkingnumResponseDto search(@RequestBody ParkingnumRequestDto parkingnumRequestDto){
 
-        log.info("주차장 차량 입출차 대수 조회 : {}",parkingnumRequestDto.toString());
+
+        commonComponent.logJson("주차장 차량 입출차 대수 조회 요청",parkingnumRequestDto);
 
         HashMap<String, Object> result = parkingnumService.search(parkingnumRequestDto);
 
-        return ParkingnumResponseDto.builder()
+        ParkingnumResponseDto response = ParkingnumResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .tparkingnum((List<Tparkingnum>) result.get("tparkingnum"))
                 .build();
+
+        commonComponent.logJson("주차장 차량 입출차 대수 조회 응답",response);
+
+        return response;
     }
 
     @PostMapping("/parkingnum")
     public ParkingnumResponseDto save(@RequestBody ParkingnumRequestDto parkingnumRequestDto){
 
-        log.info("주차장 차량 입출차 대수 등록 : {}",parkingnumRequestDto.toString());
+
+        commonComponent.logJson("주차장 차량 입출차 대수 등록 요청",parkingnumRequestDto);
 
         HashMap<String, Object> result = parkingnumService.save(parkingnumRequestDto);
 
-        return ParkingnumResponseDto.builder()
+        ParkingnumResponseDto response = ParkingnumResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .tparkingnum((List<Tparkingnum>) result.get("tparkingnum"))
                 .build();
+
+        commonComponent.logJson("주차장 차량 입출차 대수 조회 응답",response);
+
+        return response;
     }
 
     @PutMapping("/parkingnum")
     public ParkingnumResponseDto update(@RequestBody ParkingnumRequestDto parkingnumRequestDto){
 
-        log.info("주차장 차량 입출차 대수 수정 : {}",parkingnumRequestDto.toString());
+
+        commonComponent.logJson("주차장 차량 입출차 대수 수정 요청",parkingnumRequestDto);
 
         HashMap<String, Object> result = parkingnumService.update(parkingnumRequestDto);
 
-        return ParkingnumResponseDto.builder()
+        ParkingnumResponseDto response = ParkingnumResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .tparkingnum((List<Tparkingnum>) result.get("tparkingnum"))
                 .build();
+
+        commonComponent.logJson("주차장 차량 입출차 대수 수정 응답",response);
+
+        return response;
     }
 
 }

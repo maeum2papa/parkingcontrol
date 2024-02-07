@@ -1,6 +1,7 @@
 package com.dwips.parkingcontrol.api.v1.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
  * 주차장구획정보, 구획내주차면정보 와 연계됨
  *
  */
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 @Entity
 @Data
 @Builder

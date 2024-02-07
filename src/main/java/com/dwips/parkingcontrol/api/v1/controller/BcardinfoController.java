@@ -1,5 +1,6 @@
 package com.dwips.parkingcontrol.api.v1.controller;
 
+import com.dwips.parkingcontrol.api.v1.component.CommonComponent;
 import com.dwips.parkingcontrol.api.v1.domain.Tbcardinfo;
 import com.dwips.parkingcontrol.api.v1.dto.BcardinfoRequestDto;
 import com.dwips.parkingcontrol.api.v1.dto.BcardinfoResponseDto;
@@ -19,19 +20,26 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class BcardinfoController {
 
+    private final CommonComponent commonComponent;
+
     private final BcardinfoService bcardinfoService;
 
     @GetMapping("/bcardinfo")
     public BcardinfoResponseDto search(@RequestBody BcardinfoRequestDto bcardinfoRequestDto){
 
-        log.info("신용카드 매출 내역 조회 : {}",bcardinfoRequestDto.toString());
+
+        commonComponent.logJson("신용카드 매출 내역 조회 요청",bcardinfoRequestDto);
 
         HashMap<String,Object> result = bcardinfoService.search(bcardinfoRequestDto);
 
-        return BcardinfoResponseDto.builder()
+        BcardinfoResponseDto response = BcardinfoResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .tbcardinfo((List<Tbcardinfo>) result.get("bcardinfo"))
                 .build();
+
+        commonComponent.logJson("신용카드 매출 내역 조회 응답",response);
+
+        return response;
     }
 
 }

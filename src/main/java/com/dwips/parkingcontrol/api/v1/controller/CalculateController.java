@@ -1,5 +1,6 @@
 package com.dwips.parkingcontrol.api.v1.controller;
 
+import com.dwips.parkingcontrol.api.v1.component.CommonComponent;
 import com.dwips.parkingcontrol.api.v1.domain.*;
 import com.dwips.parkingcontrol.api.v1.dto.*;
 import com.dwips.parkingcontrol.api.v1.service.CalculateSearchService;
@@ -20,6 +21,8 @@ import java.util.Map;
 @RequestMapping("/api/v1")
 public class CalculateController {
 
+    private final CommonComponent commonComponent;
+
     private final CalculateService calculateService;
 
     private final CalculateSearchService calculateSearchService;
@@ -27,7 +30,7 @@ public class CalculateController {
     @PostMapping("/calculate")
     public CalculateResponseDto calculate(@RequestBody CalculateRequestDto calculateRequestDto){
 
-        log.info("정산 조회 : {}",calculateRequestDto.toString());
+        commonComponent.logJson("정산 조회 요청",calculateRequestDto);
 
         if(!calculateRequestDto.getIOTYPE().equals("C")){
             throw new RuntimeException("정산 정보가 아닙니다.");
@@ -35,7 +38,7 @@ public class CalculateController {
 
         HashMap<String, Object> result = calculateService.calculate(calculateRequestDto);
 
-        return CalculateResponseDto.builder()
+        CalculateResponseDto response = CalculateResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .tparkinfo((List<Tparkinfo>) result.get("tparkinfo"))
                 .tbcardinfo((List<List<Tbcardinfo>>) result.get("tbcardinfo"))
@@ -44,12 +47,16 @@ public class CalculateController {
                 .welfare((List<List<Twelfare>>) result.get("welfare"))
                 .build();
 
+        commonComponent.logJson("정산 조회 결과",response);
+
+        return response;
+
     }
 
     @GetMapping("/calculate/search")
     public ResponseEntity<?> calculateSearch(@RequestBody CalculateSearchRequestDto calculateSearchRequestDto){
 
-        log.info("차량 정산내역조회 : {}",calculateSearchRequestDto.toString());
+        commonComponent.logJson("차량 정산내역조회 요청",calculateSearchRequestDto);
 
         Object responseResult = null;
         Long qtype = calculateSearchRequestDto.getQtype();
@@ -137,6 +144,8 @@ public class CalculateController {
                     .totdevice((HashMap<String, List<Map<String, Long>>>) result.get("totdevice"))
                     .build();
         }
+
+        commonComponent.logJson("정산 & 출차 저장 응답",responseResult);
 
         return ResponseEntity.ok(responseResult);
     }

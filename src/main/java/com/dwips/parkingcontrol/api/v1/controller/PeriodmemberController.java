@@ -1,5 +1,6 @@
 package com.dwips.parkingcontrol.api.v1.controller;
 
+import com.dwips.parkingcontrol.api.v1.component.CommonComponent;
 import com.dwips.parkingcontrol.api.v1.domain.Tperiodmember;
 import com.dwips.parkingcontrol.api.v1.dto.*;
 import com.dwips.parkingcontrol.api.v1.service.PeriodmemberService;
@@ -16,47 +17,65 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class PeriodmemberController {
 
+    private final CommonComponent commonComponent;
+
     private final PeriodmemberService periodmemberService;
 
     //조회
     @GetMapping("/periodmember")
     public PeriodmemberResponseDto search(@RequestBody PeriodmemberRequestDto periodmemberRequestDto){
 
-        log.info("등록차량조회 : {}",periodmemberRequestDto.toString());
+
+        commonComponent.logJson("등록차량조회 요청",periodmemberRequestDto);
 
         HashMap<String, Object> result = periodmemberService.search(periodmemberRequestDto);
 
-        return PeriodmemberResponseDto.builder()
+        PeriodmemberResponseDto response = PeriodmemberResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .tperiodmember((List<Tperiodmember>) result.get("tperiodmember"))
                 .build();
+
+        commonComponent.logJson("등록차량조회 응답",response);
+
+        return response;
     }
 
     //삭제
     @DeleteMapping("/periodmember")
     public PeriodmemberResponseDto delete(@RequestBody PeriodmemberRequestDto periodmemberRequestDto){
 
-        log.info("등록차량삭제 : {}",periodmemberRequestDto.toString());
+
+        commonComponent.logJson("등록차량삭제 요청",periodmemberRequestDto);
 
         HashMap<String, Object> result = periodmemberService.delete(periodmemberRequestDto);
 
-        return PeriodmemberResponseDto.builder()
+        PeriodmemberResponseDto response = PeriodmemberResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .build();
+
+        commonComponent.logJson("등록차량삭제 응답",response);
+
+        return response;
     }
 
     //연장
     @PostMapping("/periodmember/extend")
     public PeriodmemberExtendResponseDto extend(@RequestBody PeriodmemberExtendRequestDto periodmemberExtendRequestDto){
 
-        log.info("등록차량연장 : {}",periodmemberExtendRequestDto.toString());
+
+        commonComponent.logJson("등록차량연장 요청",periodmemberExtendRequestDto);
 
         HashMap<String, Object> result = periodmemberService.extend(periodmemberExtendRequestDto);
 
-        return PeriodmemberExtendResponseDto.builder()
+        PeriodmemberExtendResponseDto response = PeriodmemberExtendResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .tperiodmember((Tperiodmember) result.get("tperiodmember"))
                 .build();
+
+
+        commonComponent.logJson("등록차량연장 응답",response);
+
+        return response;
     }
 
 }

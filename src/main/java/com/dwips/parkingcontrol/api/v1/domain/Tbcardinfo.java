@@ -1,6 +1,7 @@
 package com.dwips.parkingcontrol.api.v1.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
  *  결제종류	일반권	0
  *     정기권	1
  */
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 @Data
 @Builder
 @Entity

@@ -1,5 +1,6 @@
 package com.dwips.parkingcontrol.api.v1.controller;
 
+import com.dwips.parkingcontrol.api.v1.component.CommonComponent;
 import com.dwips.parkingcontrol.api.v1.domain.Tblacklist;
 import com.dwips.parkingcontrol.api.v1.dto.BlackListRequestDto;
 import com.dwips.parkingcontrol.api.v1.dto.BlackListResponseDto;
@@ -17,57 +18,77 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class BlacklistController {
 
+    private final CommonComponent commonComponent;
+
     private final BlacklistService blacklistService;
 
     @GetMapping("/blacklist")
     public BlackListResponseDto search(@RequestBody BlackListRequestDto blackListRequestDto){
 
-        log.info("블랙리스트 조회 : {}",blackListRequestDto.getTblacklist());
+        commonComponent.logJson("블랙리스트 조회 요청",blackListRequestDto);
 
         HashMap<String, Object> result = blacklistService.search(blackListRequestDto);
 
-        return BlackListResponseDto.builder()
+        BlackListResponseDto response = BlackListResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .tblacklist((List<Tblacklist>) result.get("tblacklist"))
                 .build();
+
+        commonComponent.logJson("블랙리스트 조회 응답",response);
+
+        return response;
     }
 
     @PostMapping("/blacklist")
     public BlackListResponseDto save(@RequestBody BlackListRequestDto blackListRequestDto) {
 
-        log.info("블랙리스트 등록 : {}",blackListRequestDto.getTblacklist());
+        commonComponent.logJson("블랙리스트 등록 요청",blackListRequestDto);
 
         HashMap<String, Object> result = blacklistService.save(blackListRequestDto);
 
-        return BlackListResponseDto.builder()
+        BlackListResponseDto response = BlackListResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .tblacklist((List<Tblacklist>) result.get("tblacklist"))
                 .build();
+
+        commonComponent.logJson("블랙리스트 등록 응답",response);
+
+        return response;
     }
 
     @PutMapping("/blacklist")
     public BlackListResponseDto update(@RequestBody BlackListRequestDto blackListRequestDto) {
 
-        log.info("블랙리스트 수정 : {}",blackListRequestDto.getTblacklist());
+
+        commonComponent.logJson("블랙리스트 수정 요청",blackListRequestDto);
 
         HashMap<String, Object> result = blacklistService.update(blackListRequestDto);
 
-        return BlackListResponseDto.builder()
+        BlackListResponseDto response = BlackListResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .tblacklist((List<Tblacklist>) result.get("tblacklist"))
                 .build();
+
+        commonComponent.logJson("블랙리스트 수정 응답",response);
+
+        return response;
     }
 
     @DeleteMapping("/blacklist")
     public BlackListResponseDto delete(@RequestBody BlackListRequestDto blackListRequestDto) {
 
-        log.info("블랙리스트 삭제 : {}",blackListRequestDto.getTblacklist());
+
+        commonComponent.logJson("블랙리스트 삭제 요청",blackListRequestDto);
 
         HashMap<String, Object> result = blacklistService.delete(blackListRequestDto);
 
-        return BlackListResponseDto.builder()
+        BlackListResponseDto response = BlackListResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .build();
+
+        commonComponent.logJson("블랙리스트 삭제 응답",response);
+
+        return response;
     }
 
 }

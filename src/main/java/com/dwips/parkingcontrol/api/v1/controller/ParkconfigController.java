@@ -1,5 +1,6 @@
 package com.dwips.parkingcontrol.api.v1.controller;
 
+import com.dwips.parkingcontrol.api.v1.component.CommonComponent;
 import com.dwips.parkingcontrol.api.v1.domain.Tparkconfig;
 import com.dwips.parkingcontrol.api.v1.dto.ParkconfigRequestDto;
 import com.dwips.parkingcontrol.api.v1.dto.ParkconfigResponseDto;
@@ -18,58 +19,76 @@ import java.util.Objects;
 @RequestMapping("/api/v1")
 public class ParkconfigController {
 
+    private final CommonComponent commonComponent;
+
     private final ParkconfigService parkconfigService;
 
     @GetMapping("/parkconfig")
     public ParkconfigResponseDto search(@RequestBody ParkconfigRequestDto parkconfigRequestDto){
 
-        log.info("주차장운영 변수 테이블 조회 : {}",parkconfigRequestDto.toString());
+        commonComponent.logJson("주차장운영 변수 테이블 조회 요청",parkconfigRequestDto);
 
         HashMap<String, Object> result  = parkconfigService.search(parkconfigRequestDto);
 
-        return ParkconfigResponseDto.builder()
+        ParkconfigResponseDto response = ParkconfigResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .tparkconfig((List<Tparkconfig>) result.get("tparkconfig"))
                 .build();
+
+        commonComponent.logJson("주차장운영 변수 테이블 조회 응답",response);
+
+        return response;
     }
 
     @PostMapping("/parkconfig")
     public ParkconfigResponseDto save(@RequestBody ParkconfigRequestDto parkconfigRequestDto){
 
-        log.info("주차장운영 변수 테이블 등록 : {}",parkconfigRequestDto.toString());
+        commonComponent.logJson("주차장운영 변수 테이블 등록 요청",parkconfigRequestDto);
 
         HashMap<String, Object> result  = parkconfigService.save(parkconfigRequestDto);
 
-        return ParkconfigResponseDto.builder()
+        ParkconfigResponseDto response = ParkconfigResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .tparkconfig((List<Tparkconfig>) result.get("tparkconfig"))
                 .build();
+
+        commonComponent.logJson("주차장운영 변수 테이블 등록 응답",response);
+
+        return response;
     }
 
     @PutMapping("/parkconfig")
     public ParkconfigResponseDto update(@RequestBody ParkconfigRequestDto parkconfigRequestDto){
 
-        log.info("주차장운영 변수 테이블 수정 : {}",parkconfigRequestDto.toString());
+        commonComponent.logJson("주차장운영 변수 테이블 수정 요청",parkconfigRequestDto);
 
         HashMap<String, Object> result  = parkconfigService.update(parkconfigRequestDto);
 
-        return ParkconfigResponseDto.builder()
+        ParkconfigResponseDto response = ParkconfigResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .tparkconfig((List<Tparkconfig>) result.get("tparkconfig"))
                 .build();
+
+        commonComponent.logJson("주차장운영 변수 테이블 수정 응답",response);
+
+        return response;
     }
 
     @DeleteMapping("/parkconfig")
 
     public ParkconfigResponseDto delete(@RequestBody ParkconfigRequestDto parkconfigRequestDto){
 
-        log.info("주차장운영 변수 테이블 삭제 : {}",parkconfigRequestDto.toString());
+        commonComponent.logJson("주차장운영 변수 테이블 삭제 요청",parkconfigRequestDto);
 
         HashMap<String, Object> result  = parkconfigService.delete(parkconfigRequestDto);
 
-        return ParkconfigResponseDto.builder()
+        ParkconfigResponseDto response = ParkconfigResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .tparkconfig((List<Tparkconfig>) result.get("tparkconfig"))
                 .build();
+
+        commonComponent.logJson("주차장운영 변수 테이블 삭제 응답",response);
+
+        return response;
     }
 }

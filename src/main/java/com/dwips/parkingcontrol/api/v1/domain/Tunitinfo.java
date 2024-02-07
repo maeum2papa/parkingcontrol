@@ -2,6 +2,7 @@ package com.dwips.parkingcontrol.api.v1.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,6 +25,7 @@ import java.time.LocalDateTime;
  * sitenum+groupnum+seccode+unitcode 는 하나만 존재해야 함 같을 경우 업데이트
  *
  */
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 @Data
 @Entity
 @Builder

@@ -1,5 +1,6 @@
 package com.dwips.parkingcontrol.api.v1.controller;
 
+import com.dwips.parkingcontrol.api.v1.component.CommonComponent;
 import com.dwips.parkingcontrol.api.v1.domain.Tperiodparktime;
 import com.dwips.parkingcontrol.api.v1.dto.PeriodparktimeRequestDto;
 import com.dwips.parkingcontrol.api.v1.dto.PeriodparktimeResponseDto;
@@ -17,57 +18,75 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class PeriodparktimeController {
 
+    private final CommonComponent commonComponent;
     private final PeriodparktimeService periodparktimeService;
 
     @GetMapping("/periodparktime")
     public PeriodparktimeResponseDto search(@RequestBody PeriodparktimeRequestDto periodparktimeRequestDto){
 
-        log.info("정기권 주차시간 테이블 조회 : {}",periodparktimeRequestDto.toString());
+        commonComponent.logJson("정기권 주차시간 테이블 조회 요청",periodparktimeRequestDto);
 
         HashMap<String,Object> result = periodparktimeService.search(periodparktimeRequestDto);
 
-        return PeriodparktimeResponseDto.builder()
+        PeriodparktimeResponseDto response = PeriodparktimeResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .tperiodparktime((List<Tperiodparktime>) result.get("tperiodparktime"))
                 .build();
+
+        commonComponent.logJson("정기권 주차시간 테이블 조회 응답",response);
+
+        return response;
     }
 
     @PostMapping("/periodparktime")
     public PeriodparktimeResponseDto save(@RequestBody PeriodparktimeRequestDto periodparktimeRequestDto){
 
-        log.info("정기권 주차시간 테이블 등록 : {}",periodparktimeRequestDto.toString());
+        commonComponent.logJson("정기권 주차시간 테이블 등록 요청",periodparktimeRequestDto);
 
         HashMap<String,Object> result = periodparktimeService.save(periodparktimeRequestDto);
 
-        return PeriodparktimeResponseDto.builder()
+        PeriodparktimeResponseDto response = PeriodparktimeResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .tperiodparktime((List<Tperiodparktime>) result.get("tperiodparktime"))
                 .build();
+
+        commonComponent.logJson("정기권 주차시간 테이블 등록 응답",response);
+
+        return response;
     }
 
     @PutMapping("/periodparktime")
     public PeriodparktimeResponseDto update(@RequestBody PeriodparktimeRequestDto periodparktimeRequestDto){
 
-        log.info("정기권 주차시간 테이블 수정 : {}",periodparktimeRequestDto.toString());
+        commonComponent.logJson("정기권 주차시간 테이블 수정 요청",periodparktimeRequestDto);
 
         HashMap<String,Object> result = periodparktimeService.update(periodparktimeRequestDto);
 
-        return PeriodparktimeResponseDto.builder()
+        PeriodparktimeResponseDto response = PeriodparktimeResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .tperiodparktime((List<Tperiodparktime>) result.get("tperiodparktime"))
                 .build();
+
+        commonComponent.logJson("정기권 주차시간 테이블 수정 응답",response);
+
+        return response;
     }
 
     @DeleteMapping("/periodparktime")
     public PeriodparktimeResponseDto delete(@RequestBody PeriodparktimeRequestDto periodparktimeRequestDto){
 
-        log.info("정기권 주차시간 테이블 삭제 : {}",periodparktimeRequestDto.toString());
+
+        commonComponent.logJson("정기권 주차시간 테이블 삭제 요청",periodparktimeRequestDto);
 
         HashMap<String,Object> result = periodparktimeService.delete(periodparktimeRequestDto);
 
-        return PeriodparktimeResponseDto.builder()
+        PeriodparktimeResponseDto response = PeriodparktimeResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .build();
+
+        commonComponent.logJson("정기권 주차시간 테이블 삭제 응답",response);
+
+        return response;
     }
 
 

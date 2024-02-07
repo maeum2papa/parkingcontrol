@@ -1,5 +1,10 @@
 package com.dwips.parkingcontrol.api.v1.component;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -12,8 +17,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@Slf4j
 @Component
+@RequiredArgsConstructor
 public class CommonComponent {
+
+    private final ObjectMapper objectMapper;
+
+    private final HttpServletRequest request;
 
     // "0000-00-00 00:00:00" -> LocalDateTime
     public LocalDateTime stringDateTimeToLocalDateTime(String dateString) {
@@ -120,5 +131,17 @@ public class CommonComponent {
         }
 
         return serverResponse;
+    }
+
+    public void logJson(String massage, Object dto){
+        try {
+            String requestJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(dto);
+            log.info("["+massage+"]");
+            log.info(request.getMethod());
+            log.info(request.getRequestURL().toString());
+            log.info("BodyData :\n{}", requestJson);
+        } catch (JsonProcessingException e) {
+            log.error("Error processing JSON", e);
+        }
     }
 }

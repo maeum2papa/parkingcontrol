@@ -3,6 +3,7 @@ package com.dwips.parkingcontrol.api.v1.dto;
 import com.dwips.parkingcontrol.api.v1.domain.Tbcardinfo;
 import com.dwips.parkingcontrol.api.v1.domain.Tparkinfo;
 import com.dwips.parkingcontrol.api.v1.domain.Tperiodmember;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.util.List;
 
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 @Data
 @Builder
 @NoArgsConstructor

@@ -1,11 +1,13 @@
 package com.dwips.parkingcontrol.api.v1.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 @Data
 @Entity
 @Builder

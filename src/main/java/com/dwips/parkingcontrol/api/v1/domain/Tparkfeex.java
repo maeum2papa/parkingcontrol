@@ -1,6 +1,7 @@
 package com.dwips.parkingcontrol.api.v1.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
  * 중복확인 sitenum+groupnum+code 이 하나만 존재해야 함 같은항목이 올경우 무조건 업데이트 하기
  *
  */
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 @Data
 @Entity
 @Builder

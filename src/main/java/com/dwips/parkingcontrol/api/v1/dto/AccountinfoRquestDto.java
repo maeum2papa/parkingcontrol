@@ -1,6 +1,7 @@
 package com.dwips.parkingcontrol.api.v1.dto;
 
 import com.dwips.parkingcontrol.api.v1.domain.Taccountinfo;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,5 +1,6 @@
 package com.dwips.parkingcontrol.api.v1.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
  *
  * 	입차 및 출차시에 자동 카운팅후 결과 전송하기
  */
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 @Data
 @Entity
 @Builder

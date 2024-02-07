@@ -1,5 +1,6 @@
 package com.dwips.parkingcontrol.api.v1.controller;
 
+import com.dwips.parkingcontrol.api.v1.component.CommonComponent;
 import com.dwips.parkingcontrol.api.v1.dto.ApsinfoRequestDto;
 import com.dwips.parkingcontrol.api.v1.dto.ApsinfoResponseDto;
 import com.dwips.parkingcontrol.api.v1.service.ApsinfoService;
@@ -15,6 +16,8 @@ import java.util.HashMap;
 @RequestMapping("/api/v1")
 public class ApsinfoController {
 
+    private final CommonComponent commonComponent;
+
     private final ApsinfoService apsinfoService;
 
     @PostMapping("/apsinfo")
@@ -25,19 +28,23 @@ public class ApsinfoController {
 
         if(apsinfoRequestDto.getTapsinfo().getStatus()!=0){
 
-            log.info("무인정산상태 등록 : {}",apsinfoRequestDto.toString());
+            commonComponent.logJson("무인정산상태 등록 요청",apsinfoRequestDto);
 
             result = apsinfoService.save(apsinfoRequestDto);
         }else if(apsinfoRequestDto.getTapsinfo().getStatus()==1 || apsinfoRequestDto.getTapsinfo().getStatus()==2){
 
-            log.info("무인정산상태 수정 : {}",apsinfoRequestDto.toString());
+            commonComponent.logJson("무인정산상태 수정 요청",apsinfoRequestDto);
 
             result = apsinfoService.update(apsinfoRequestDto);
         }
 
-        return ApsinfoResponseDto.builder()
+        ApsinfoResponseDto response = ApsinfoResponseDto.builder()
                 .result((Integer) result.get("result"))
                 .build();
+
+        commonComponent.logJson("무인정산상태 등록 또는 수정 응답",response);
+
+        return response;
     }
 
 }
