@@ -23,7 +23,7 @@ public class LogonController {
     private final LogonService logonService;
 
     @GetMapping("/logon")
-    public LogonResponseDto search(@RequestBody LogonRequestDto logonRequestDto){
+    public LogonResponseDto search(@ModelAttribute LogonRequestDto logonRequestDto){
 
         commonComponent.logJson("로그온 정보 조회 요청",logonRequestDto);
 

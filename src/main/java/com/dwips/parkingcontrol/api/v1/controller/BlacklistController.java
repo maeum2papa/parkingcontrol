@@ -23,7 +23,7 @@ public class BlacklistController {
     private final BlacklistService blacklistService;
 
     @GetMapping("/blacklist")
-    public BlackListResponseDto search(@RequestBody BlackListRequestDto blackListRequestDto){
+    public BlackListResponseDto search(@ModelAttribute BlackListRequestDto blackListRequestDto){
 
         commonComponent.logJson("블랙리스트 조회 요청",blackListRequestDto);
 

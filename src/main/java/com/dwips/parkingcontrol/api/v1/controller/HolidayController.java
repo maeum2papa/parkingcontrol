@@ -23,7 +23,7 @@ public class HolidayController {
     private final HolidayService holidayService;
 
     @GetMapping("/holiday")
-    public HolidayResponseDto search(@RequestBody HolidayRequestDto holidayRequestDto){
+    public HolidayResponseDto search(@ModelAttribute HolidayRequestDto holidayRequestDto){
 
         commonComponent.logJson("휴일 테이블 조회 요청",holidayRequestDto);
 

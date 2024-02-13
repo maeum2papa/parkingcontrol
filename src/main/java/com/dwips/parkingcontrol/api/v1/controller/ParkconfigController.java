@@ -24,7 +24,7 @@ public class ParkconfigController {
     private final ParkconfigService parkconfigService;
 
     @GetMapping("/parkconfig")
-    public ParkconfigResponseDto search(@RequestBody ParkconfigRequestDto parkconfigRequestDto){
+    public ParkconfigResponseDto search(@ModelAttribute ParkconfigRequestDto parkconfigRequestDto){
 
         commonComponent.logJson("주차장운영 변수 테이블 조회 요청",parkconfigRequestDto);
 

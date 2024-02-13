@@ -24,7 +24,7 @@ public class ParkunpaiedController {
     private final ParkunpaiedService parkunpaiedService;
 
     @GetMapping("/parkunpaied")
-    public ParkunpaiedResponseDto search(@RequestBody ParkunpaiedRequestDto parkunpaiedRequestDto){
+    public ParkunpaiedResponseDto search(@ModelAttribute ParkunpaiedRequestDto parkunpaiedRequestDto){
 
 
         commonComponent.logJson("미납차량정보 조회 요청",parkunpaiedRequestDto);

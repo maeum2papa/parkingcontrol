@@ -23,7 +23,7 @@ public class BangmunController {
     private final BangmunService bangmunService;
 
     @GetMapping("/bangmun")
-    public BangmunResponseDto search(@RequestBody BangmunRequestDto bangmunRequestDto){
+    public BangmunResponseDto search(@ModelAttribute BangmunRequestDto bangmunRequestDto){
 
         commonComponent.logJson("방문차량 조회 요청",bangmunRequestDto);
 

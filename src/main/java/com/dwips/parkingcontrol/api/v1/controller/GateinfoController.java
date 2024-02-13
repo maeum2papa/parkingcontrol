@@ -22,7 +22,7 @@ public class GateinfoController {
     private final TgateinfoService tgateinfoService;
 
     @GetMapping("/gateinfo")
-    public GateinfoResponseDto search(@RequestBody GateinfoRequestDto gateinfoRequestDto){
+    public GateinfoResponseDto search(@ModelAttribute GateinfoRequestDto gateinfoRequestDto){
 
         commonComponent.logJson("차단기 제어 조회 요청",gateinfoRequestDto);
 

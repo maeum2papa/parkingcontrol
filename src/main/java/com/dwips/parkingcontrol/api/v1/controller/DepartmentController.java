@@ -23,7 +23,7 @@ public class DepartmentController {
     private final DepartmentService departmentService;
 
     @GetMapping("/department")
-    public DepartmentResponseDto search(@RequestBody DepartmentRequestDto departmentRequestDto){
+    public DepartmentResponseDto search(@ModelAttribute DepartmentRequestDto departmentRequestDto){
 
         commonComponent.logJson("부서정보 테이블(등록차량 추가정보) 조회 요청",departmentRequestDto);
 

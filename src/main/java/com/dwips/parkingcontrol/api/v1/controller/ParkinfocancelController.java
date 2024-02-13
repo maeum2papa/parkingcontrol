@@ -25,7 +25,7 @@ public class ParkinfocancelController {
     private final ParkinfocancelService parkinfocancelService;
 
     @GetMapping("/parkinfocancel")
-    public ParkinfocancelResponseDto search(@RequestBody ParkinfocancelRequestDto parkinfocancelRequestDto){
+    public ParkinfocancelResponseDto search(@ModelAttribute ParkinfocancelRequestDto parkinfocancelRequestDto){
 
 
         commonComponent.logJson("카드정산취소 조회 요청",parkinfocancelRequestDto);

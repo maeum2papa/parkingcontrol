@@ -24,7 +24,7 @@ public class ParkinfoController {
     private final ParkinfoService parkinfoService;
 
     @GetMapping("/parkinfo")
-    public ParkinfoResponseDto search(@RequestBody ParkinfoRequestDto parkinfoRequestDto){
+    public ParkinfoResponseDto search(@ModelAttribute ParkinfoRequestDto parkinfoRequestDto){
 
         commonComponent.logJson("일반차량 검색 요청",parkinfoRequestDto);
 

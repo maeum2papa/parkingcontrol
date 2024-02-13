@@ -23,7 +23,7 @@ public class CompanyController {
     private final CompanyService companyService;
 
     @GetMapping("/company")
-    public CompanyResponseDto search(@RequestBody CompanyRequestDto companyRequestDto){
+    public CompanyResponseDto search(@ModelAttribute CompanyRequestDto companyRequestDto){
 
         commonComponent.logJson("회사정보 테이블(등록차량 추가정보) 조회 요청",companyRequestDto);
 

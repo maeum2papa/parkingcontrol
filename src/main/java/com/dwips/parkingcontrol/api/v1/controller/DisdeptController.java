@@ -24,7 +24,7 @@ public class DisdeptController {
     private final DisdeptService disdeptService;
 
     @GetMapping("/disdept")
-    public DisdeptResponseDto search(@RequestBody DisdeptRequestDto disdeptRequestDto){
+    public DisdeptResponseDto search(@ModelAttribute DisdeptRequestDto disdeptRequestDto){
 
 
         commonComponent.logJson("할인업체 테이블(웹상에서 입주자정보) 조회 요청",disdeptRequestDto);

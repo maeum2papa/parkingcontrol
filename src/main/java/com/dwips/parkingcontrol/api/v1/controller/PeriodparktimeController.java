@@ -22,7 +22,7 @@ public class PeriodparktimeController {
     private final PeriodparktimeService periodparktimeService;
 
     @GetMapping("/periodparktime")
-    public PeriodparktimeResponseDto search(@RequestBody PeriodparktimeRequestDto periodparktimeRequestDto){
+    public PeriodparktimeResponseDto search(@ModelAttribute PeriodparktimeRequestDto periodparktimeRequestDto){
 
         commonComponent.logJson("정기권 주차시간 테이블 조회 요청",periodparktimeRequestDto);
 

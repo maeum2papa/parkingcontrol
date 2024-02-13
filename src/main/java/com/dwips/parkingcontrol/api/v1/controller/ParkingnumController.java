@@ -24,7 +24,7 @@ public class ParkingnumController {
     private final ParkingnumService parkingnumService;
 
     @GetMapping("/parkingnum")
-    public ParkingnumResponseDto search(@RequestBody ParkingnumRequestDto parkingnumRequestDto){
+    public ParkingnumResponseDto search(@ModelAttribute ParkingnumRequestDto parkingnumRequestDto){
 
 
         commonComponent.logJson("주차장 차량 입출차 대수 조회 요청",parkingnumRequestDto);

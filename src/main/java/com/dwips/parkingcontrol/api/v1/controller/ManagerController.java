@@ -25,7 +25,7 @@ public class ManagerController {
     private final ManagerService managerService;
 
     @GetMapping("/manager")
-    public ManagerResponseDto search(@RequestBody ManagerRequestDto managerRequestDto){
+    public ManagerResponseDto search(@ModelAttribute ManagerRequestDto managerRequestDto){
 
         commonComponent.logJson("담당자 테이블 조회 요청",managerRequestDto);
 

@@ -25,7 +25,7 @@ public class VaninfoController {
     private VaninfoService vaninfoService;
 
     @GetMapping("/vaninfo")
-    public VaninfoResponseDto search(@RequestBody VaninfoRequestDto vaninfoRequestDto){
+    public VaninfoResponseDto search(@ModelAttribute VaninfoRequestDto vaninfoRequestDto){
 
         commonComponent.logJson("벤사정보 조회 요청",vaninfoRequestDto);
 

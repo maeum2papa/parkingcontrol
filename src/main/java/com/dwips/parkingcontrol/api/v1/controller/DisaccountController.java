@@ -23,7 +23,7 @@ public class DisaccountController {
     private final DisaccountService disaccountService;
 
     @GetMapping("/disaccount")
-    public DisaccountResponseDto search(@RequestBody DisaccountRequestDto disaccountRequestDto){
+    public DisaccountResponseDto search(@ModelAttribute DisaccountRequestDto disaccountRequestDto){
 
         commonComponent.logJson("할인계정 테이블(웹상에서 입주자가 사용) 조회 요청",disaccountRequestDto);
 

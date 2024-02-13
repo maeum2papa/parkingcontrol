@@ -23,7 +23,7 @@ public class WelfareController {
     private final WelfareService welfareService;
 
     @GetMapping("/welfare")
-    public WelfareResponseDto search(@RequestBody WelfareRequestDto welfareRequestDto){
+    public WelfareResponseDto search(@ModelAttribute WelfareRequestDto welfareRequestDto){
 
 
         commonComponent.logJson("사전할인차량 테이블 조회 요청",welfareRequestDto);

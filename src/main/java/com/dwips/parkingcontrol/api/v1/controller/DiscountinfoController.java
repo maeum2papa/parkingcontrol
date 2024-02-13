@@ -7,10 +7,7 @@ import com.dwips.parkingcontrol.api.v1.dto.DiscountinfoResponseDto;
 import com.dwips.parkingcontrol.api.v1.service.DiscountinfoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +23,7 @@ public class DiscountinfoController {
     private final DiscountinfoService discountinfoService;
 
     @GetMapping("/discountinfo")
-    public DiscountinfoResponseDto search(@RequestBody DiscountinfoRequestDto discountinfoRequestDto){
+    public DiscountinfoResponseDto search(@ModelAttribute DiscountinfoRequestDto discountinfoRequestDto){
 
         commonComponent.logJson("할인내역 조회 요청",discountinfoRequestDto);
 

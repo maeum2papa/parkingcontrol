@@ -23,7 +23,7 @@ public class PeriodaccountController {
     private final PeriodaccountService periodaccountService;
 
     @GetMapping("/periodaccount")
-    public PeriodaccountResponseDto search(@RequestBody PeriodaccountRequestDto periodaccountRequestDto){
+    public PeriodaccountResponseDto search(@ModelAttribute PeriodaccountRequestDto periodaccountRequestDto){
 
 
         commonComponent.logJson("등록차량 매출 내역 조회 요청",periodaccountRequestDto);

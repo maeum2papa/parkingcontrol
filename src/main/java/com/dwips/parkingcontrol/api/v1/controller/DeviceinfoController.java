@@ -27,7 +27,7 @@ public class DeviceinfoController {
     private final DeviceinfoService deviceinfoService;
 
     @GetMapping("/deviceinfo")
-    public DeviceinfoResponseDto search(@RequestBody DeviceinfoRequestDto deviceinfoRequestDto){
+    public DeviceinfoResponseDto search(@ModelAttribute DeviceinfoRequestDto deviceinfoRequestDto){
 
         commonComponent.logJson("장치리스트 조회 요청",deviceinfoRequestDto);
 

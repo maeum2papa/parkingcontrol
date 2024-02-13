@@ -31,7 +31,7 @@ public class AccountinfoController {
 
     @Operation(summary = "원격할인 카운트 조회", description = "")
     @GetMapping("/accountinfo")
-    public AccountinfoResponseDto search(@RequestBody AccountinfoRquestDto accountinfoRquestDto){
+    public AccountinfoResponseDto search(@ModelAttribute AccountinfoRquestDto accountinfoRquestDto){
 
         commonComponent.logJson("원격할인 카운트 조회 요청",accountinfoRquestDto);
 

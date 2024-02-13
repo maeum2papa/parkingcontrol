@@ -41,7 +41,7 @@ public class NoregcarController {
 
 
     @GetMapping("/noregcar/search")
-    public NoregcarSearchResponseDto search(@RequestBody NoregcarSearchRequestDto noregcarSearchRequestDto){
+    public NoregcarSearchResponseDto search(@ModelAttribute NoregcarSearchRequestDto noregcarSearchRequestDto){
 
 
         commonComponent.logJson("미인식차량 조회 요청",noregcarSearchRequestDto);

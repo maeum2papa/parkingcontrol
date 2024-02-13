@@ -54,7 +54,7 @@ public class CalculateController {
     }
 
     @GetMapping("/calculate/search")
-    public ResponseEntity<?> calculateSearch(@RequestBody CalculateSearchRequestDto calculateSearchRequestDto){
+    public ResponseEntity<?> calculateSearch(@ModelAttribute CalculateSearchRequestDto calculateSearchRequestDto){
 
         commonComponent.logJson("차량 정산내역조회 요청",calculateSearchRequestDto);
 

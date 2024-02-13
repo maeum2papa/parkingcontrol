@@ -25,7 +25,7 @@ public class BcardinfoController {
     private final BcardinfoService bcardinfoService;
 
     @GetMapping("/bcardinfo")
-    public BcardinfoResponseDto search(@RequestBody BcardinfoRequestDto bcardinfoRequestDto){
+    public BcardinfoResponseDto search(@ModelAttribute BcardinfoRequestDto bcardinfoRequestDto){
 
 
         commonComponent.logJson("신용카드 매출 내역 조회 요청",bcardinfoRequestDto);

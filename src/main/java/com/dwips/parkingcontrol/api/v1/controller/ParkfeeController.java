@@ -23,7 +23,7 @@ public class ParkfeeController {
     private final ParkfeeService parkfeeService;
 
     @GetMapping("/parkfee")
-    public ParkfeeResponseDto search(@RequestBody ParkfeeRequestDto parkfeeRequestDto){
+    public ParkfeeResponseDto search(@ModelAttribute ParkfeeRequestDto parkfeeRequestDto){
 
 
         commonComponent.logJson("주차장 요금 테이블 조회 요청",parkfeeRequestDto);

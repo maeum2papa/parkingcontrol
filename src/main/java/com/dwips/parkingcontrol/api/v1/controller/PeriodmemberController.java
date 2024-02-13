@@ -23,7 +23,7 @@ public class PeriodmemberController {
 
     //조회
     @GetMapping("/periodmember")
-    public PeriodmemberResponseDto search(@RequestBody PeriodmemberRequestDto periodmemberRequestDto){
+    public PeriodmemberResponseDto search(@ModelAttribute PeriodmemberRequestDto periodmemberRequestDto){
 
 
         commonComponent.logJson("등록차량조회 요청",periodmemberRequestDto);

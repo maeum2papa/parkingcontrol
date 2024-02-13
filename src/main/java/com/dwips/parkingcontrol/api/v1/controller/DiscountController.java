@@ -25,7 +25,7 @@ public class DiscountController {
     private final DiscountService discountService;
 
     @GetMapping("/discount")
-    public DiscountResponseDto search(@RequestBody DiscountRequestDto discountRequest){
+    public DiscountResponseDto search(@ModelAttribute DiscountRequestDto discountRequest){
 
         commonComponent.logJson("할인요금 테이블 조회 요청",discountRequest);
 

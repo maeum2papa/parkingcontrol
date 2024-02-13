@@ -22,7 +22,7 @@ public class PingController {
     private final PingService pingService;
 
     @GetMapping("/ping")
-    public PingResponseDto search(@RequestBody PingRequestDto pingRequestDto){
+    public PingResponseDto search(@ModelAttribute PingRequestDto pingRequestDto){
 
 
         commonComponent.logJson("현재 입출차 및 정산 테이블 인덱스 조회 요청",pingRequestDto);
@@ -94,7 +94,7 @@ public class PingController {
 
 
     @GetMapping("/ping/xparkin")
-    public PingResponseDto xparkin(@RequestBody PingRequestDto pingRequestDto){
+    public PingResponseDto xparkin(@ModelAttribute PingRequestDto pingRequestDto){
 
         commonComponent.logJson("xparkin 모니터링 요청",pingRequestDto);
 
@@ -114,7 +114,7 @@ public class PingController {
 
 
     @GetMapping("/ping/xparkinfo")
-    public PingResponseDto xparkinfo(@RequestBody PingRequestDto pingRequestDto){
+    public PingResponseDto xparkinfo(@ModelAttribute PingRequestDto pingRequestDto){
 
 
         commonComponent.logJson("xparkinfo 모니터링 요청",pingRequestDto);
@@ -134,7 +134,7 @@ public class PingController {
 
 
     @GetMapping("/ping/xparkcal")
-    public PingResponseDto xparkcal(@RequestBody PingRequestDto pingRequestDto){
+    public PingResponseDto xparkcal(@ModelAttribute PingRequestDto pingRequestDto){
 
 
         commonComponent.logJson("xparkcal 모니터링 요청",pingRequestDto);
@@ -153,7 +153,7 @@ public class PingController {
     }
 
     @GetMapping("/ping/xperiodin")
-    public PingResponseDto xperiodin(@RequestBody PingRequestDto pingRequestDto){
+    public PingResponseDto xperiodin(@ModelAttribute PingRequestDto pingRequestDto){
 
 
         commonComponent.logJson("xperiodin 모니터링 요청",pingRequestDto);
@@ -172,7 +172,7 @@ public class PingController {
     }
 
     @GetMapping("/ping/xperiodout")
-    public PingResponseDto xperiodout(@RequestBody PingRequestDto pingRequestDto){
+    public PingResponseDto xperiodout(@ModelAttribute PingRequestDto pingRequestDto){
 
 
         commonComponent.logJson("xperiodout 모니터링 요청",pingRequestDto);
@@ -191,7 +191,7 @@ public class PingController {
     }
 
     @GetMapping("/ping/xcredit")
-    public PingResponseDto xcredit(@RequestBody PingRequestDto pingRequestDto){
+    public PingResponseDto xcredit(@ModelAttribute PingRequestDto pingRequestDto){
 
 
         commonComponent.logJson("xcredit 모니터링 요청",pingRequestDto);
