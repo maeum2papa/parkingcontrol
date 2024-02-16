@@ -53,6 +53,10 @@ public class ManagerServiceImpl implements ManagerService{
             );
         }
 
+        if(managerRequestDto.getSitenum() == null && managerRequestDto.getGroupnum() == null){
+            tmanagerList = tmanagerRepository.findAll();
+        }
+
         if(!tmanagerList.isEmpty()){
             result = 1;
         }
