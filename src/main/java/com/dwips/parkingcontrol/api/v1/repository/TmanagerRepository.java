@@ -16,5 +16,5 @@ public interface TmanagerRepository extends JpaRepository<Tmanager,Long> {
 
     List<Tmanager> findAllBySitenumAndGroupnumAndMidAndName(Long sitenum, Long groupnum, String id, String name);
 
-    Tmanager findByMid(String id);
+    Long countByMid(String id);
 }

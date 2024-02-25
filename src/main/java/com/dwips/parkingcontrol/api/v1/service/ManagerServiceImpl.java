@@ -1,5 +1,6 @@
 package com.dwips.parkingcontrol.api.v1.service;
 
+import com.dwips.parkingcontrol.api.v1.component.CommonComponent;
 import com.dwips.parkingcontrol.api.v1.domain.Tmanager;
 import com.dwips.parkingcontrol.api.v1.dto.ManagerRequestDto;
 import com.dwips.parkingcontrol.api.v1.repository.TmanagerRepository;
@@ -17,6 +18,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 public class ManagerServiceImpl implements ManagerService{
+
+    private final CommonComponent commonComponent;
 
     private final TmanagerRepository tmanagerRepository;
 
@@ -85,8 +88,9 @@ public class ManagerServiceImpl implements ManagerService{
                     && managerRequestDto.getTmanager().getGrade() != null && managerRequestDto.getTmanager().getGrade() != 0L
             ){
 
-                Tmanager tmanager = tmanagerRepository.findByMid(managerRequestDto.getTmanager().getMid());
-                if(tmanager == null) {
+                Long tmanagerCount = tmanagerRepository.countByMid(managerRequestDto.getTmanager().getMid());
+
+                if(tmanagerCount == 0) {
                     tmanagerList.add(tmanagerRepository.save(managerRequestDto.getTmanager()));
                     result = 1;
                 }
