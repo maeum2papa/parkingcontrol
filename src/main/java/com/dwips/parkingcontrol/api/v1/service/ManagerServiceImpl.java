@@ -76,8 +76,21 @@ public class ManagerServiceImpl implements ManagerService{
 
         if(managerRequestDto.getTmanager()!=null){
 
-            tmanagerList.add(tmanagerRepository.save(managerRequestDto.getTmanager()));
-            result = 1;
+            if(managerRequestDto.getTmanager().getSitenum() != null && managerRequestDto.getTmanager().getSitenum() != 0L
+                    && managerRequestDto.getTmanager().getGroupnum() != null && managerRequestDto.getTmanager().getGroupnum() != 0L
+                    && managerRequestDto.getTmanager().getName() != null && !managerRequestDto.getTmanager().getName().isEmpty()
+                    && managerRequestDto.getTmanager().getMid() != null && !managerRequestDto.getTmanager().getMid().isEmpty()
+                    && managerRequestDto.getTmanager().getMpw() != null && !managerRequestDto.getTmanager().getMpw().isEmpty()
+                    && managerRequestDto.getTmanager().getTel() != null && !managerRequestDto.getTmanager().getTel().isEmpty()
+                    && managerRequestDto.getTmanager().getGrade() != null && managerRequestDto.getTmanager().getGrade() != 0L
+            ){
+
+                Tmanager tmanager = tmanagerRepository.findByMid(managerRequestDto.getTmanager().getMid());
+                if(tmanager == null) {
+                    tmanagerList.add(tmanagerRepository.save(managerRequestDto.getTmanager()));
+                    result = 1;
+                }
+            }
         }
 
         HashMap<String, Object> resultMap = new HashMap<>();
